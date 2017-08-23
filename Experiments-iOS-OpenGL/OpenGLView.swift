@@ -50,18 +50,21 @@ class OpenGLView:UIView{
     
     private func config() {
         backgroundColor = UIColor.clear
-        self.setupLayer()
-        self.setupContext()
-        self.setupRenderBuffer()
-        self.setupFrameBuffer()
-        self.compileShaders()
-        self.setupVBOs()
-        self.render()
+        setupLayer()
+        setupContext()
+        setupRenderBuffer()
+        setupFrameBuffer()
+        compileShaders()
+        setupVBOs()
+        render(nil)
+        setupDisplayLink()
     }
+    
     
     private func setupLayer(){
         eaglLayer = layer as! CAEAGLLayer
-        eaglLayer.isOpaque = true
+        eaglLayer.isOpaque = false //make transparent
+        backgroundColor = UIColor.clear
     }
     private func setupContext(){
         if let context = EAGLContext(api: .openGLES2) {
@@ -84,9 +87,13 @@ class OpenGLView:UIView{
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), frameBuffer)
         glFramebufferRenderbuffer(GLenum(GL_FRAMEBUFFER), GLenum(GL_COLOR_ATTACHMENT0), GLenum(GL_RENDERBUFFER), colorRenderBuffer)
     }
-    private func render() {
+    private func setupDisplayLink(){
+        let link = CADisplayLink(target: self, selector: #selector(render(_:)))
+        link.add(to: RunLoop.current, forMode: .defaultRunLoopMode)
+    }
+    @objc private func render(_ obj:Any?) {
         //background color
-        glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0)
+        glClearColor(0, 0, 0, 0.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
         
         renderShaders()
@@ -95,6 +102,7 @@ class OpenGLView:UIView{
         if !success{
             preconditionFailure("failed to presentRenderbuffer")
         }
+        
     }
     
     //Shaders
@@ -193,5 +201,18 @@ class OpenGLView:UIView{
         glVertexAttribPointer(positionSlot, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), nil)
         glVertexAttribPointer(colorSlot, 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), UnsafePointer<Float>(bitPattern: 3 * MemoryLayout<Float>.size))
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
+        
+        //animate
+        let colorValue = 0.5 + 0.5 * sin(Float(CACurrentMediaTime()))
+        let colorValueInv = 0.5 + 0.5 * cos(Float(CACurrentMediaTime()))
+        Vertices = [
+            Vertex(Position: (1, -1, 0) , Color: (colorValue, 0, colorValueInv, colorValue)),
+            Vertex(Position: (1, 1, 0)  , Color: (0, colorValueInv, 0, colorValueInv)),
+            Vertex(Position: (-1, 1, 0) , Color: (colorValue, 0, colorValue, colorValue)),
+            Vertex(Position: (-1, -1, 0), Color: (colorValueInv/2, 0, 0, colorValueInv))
+        ]
+        
+        glBufferData(GLenum(GL_ARRAY_BUFFER), (Vertices.count * MemoryLayout<Vertex>.size), Vertices, GLenum(GL_STATIC_DRAW))
+        
     }
 }
