@@ -3,7 +3,7 @@
 //  Experiments-iOS-OpenGL
 //
 //  Created by 0x384c0 on 8/24/17.
-//  Copyright © 2017 Spalmalo. All rights reserved.
+//  Copyright © 2017 0x384c0. All rights reserved.
 //
 import UIKit
 
@@ -16,6 +16,7 @@ class ShaderSelectViewController: UITableViewController {
         let
         vc = segue.destination as! ShaderViewController,
         shaderName = sender as! String
+        
         vc.setup(shaderName: shaderName)
     }
 }

@@ -31,7 +31,8 @@ class OpenGLView:UIView{
     var
     eaglLayer:CAEAGLLayer!,
     context:EAGLContext!,
-    colorRenderBuffer:GLuint = 1
+    colorRenderBuffer:GLuint = 1,
+    skipFrames = 0
     
     
     override class var layerClass: AnyClass {
@@ -39,7 +40,10 @@ class OpenGLView:UIView{
     }
     
     
-    func config(shaderName: String) {
+    func config(shaderName: String,textureName:String?,skipFrames:Int) {
+        self.textureName = textureName
+        self.skipFrames = skipFrames
+        self.skippedFrames = skipFrames
         backgroundColor = UIColor.clear
         setupLayer()
         setupContext()
@@ -51,14 +55,13 @@ class OpenGLView:UIView{
         setupDisplayLink()
     }
     
-    
     private func setupLayer(){
         eaglLayer = layer as! CAEAGLLayer
-        eaglLayer.isOpaque = false //make transparent
+        eaglLayer.isOpaque = skipFrames != 0 //make transparent
         backgroundColor = UIColor.clear
     }
     private func setupContext(){
-        if let context = EAGLContext(api: .openGLES2) {
+        if let context = EAGLContext(api: .openGLES3) {
             self.context = context
             if !EAGLContext.setCurrent(context) {
                 preconditionFailure("Failed to set current opengl context")
@@ -82,12 +85,21 @@ class OpenGLView:UIView{
         let link = CADisplayLink(target: self, selector: #selector(render(_:)))
         link.add(to: RunLoop.current, forMode: .defaultRunLoopMode)
     }
+    
+    private var skippedFrames = 0
     @objc private func render(_ obj:Any?) {
+        if skippedFrames >= skipFrames{
+            skippedFrames = 0
+        } else {
+            skippedFrames += 1
+            return
+        }
         //background color
         glClearColor(0, 0, 0, 0.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
         
         renderShaders()
+        renderTextures()
         
         let success = context.presentRenderbuffer(Int(GL_RENDERBUFFER))
         if !success{
@@ -97,7 +109,7 @@ class OpenGLView:UIView{
     }
     
     //Shaders
-    var
+    private var
     positionSlot: GLuint = 0,
     colorSlot: GLuint = 0,
     iTimeSlot: GLint = 0,
@@ -163,8 +175,9 @@ class OpenGLView:UIView{
         glEnableVertexAttribArray(self.colorSlot)
         
         
-        self.iTimeSlot = GLint(glGetUniformLocation(programHandle, "iTime"))
-        self.iResolution = GLint(glGetUniformLocation(programHandle, "iResolution"))
+        iTimeSlot = GLint(glGetUniformLocation(programHandle, "iTime"))
+        iResolution = GLint(glGetUniformLocation(programHandle, "iResolution"))
+        addTextureToShader(programHandle)
     }
     private func setupVBOs() {
         var vertexBuffer: GLuint = 0
@@ -188,6 +201,69 @@ class OpenGLView:UIView{
     private func setVariablesToShaders(){
         glUniform1f(iTimeSlot, GLfloat(CACurrentMediaTime()))
         glUniform3f(iResolution, GLfloat(frame.size.width), GLfloat(frame.size.height), 0)
+    }
+    
+    //textures
+    var
+    textureName:String?,
+    texture:GLuint = 0,
+    textureUniform:GLuint = 0
+    private func addTextureToShader(_ programHandle:GLuint){
+        if textureName == nil {return}
+        textureUniform = GLuint(glGetUniformLocation(programHandle, "iChannel0"))
+    }
+    private func setuptextures(){
+        if let textureName = textureName{
+            texture = setupTexture(textureName)
+        }
+    }
+    private func setupTexture(_ fileName: String) -> GLuint{
+        let folder = "presets/"
+        let spriteImage: CGImage? = UIImage(named: folder + fileName + ".png")?.cgImage
+        if (spriteImage == nil) {
+            preconditionFailure("Failed to load image!")
+        }
+        let width: Int = spriteImage!.width
+        let height: Int = spriteImage!.height
+        //let spriteData = UnsafeMutablePointer<GLubyte>(calloc(Int(UInt(CGFloat(width) * CGFloat(height) * 4)), sizeof(GLubyte)))
+        //gz change
+        let spriteData = UnsafeMutablePointer<GLubyte>.allocate(capacity:Int(UInt(CGFloat(width) * CGFloat(height) * 4)))
+        
+        
+        let spriteContext: CGContext = CGContext(data: spriteData,
+                                                 width: width,
+                                                 height: height,
+                                                 bitsPerComponent: 8,
+                                                 bytesPerRow: width*4,
+                                                 space: spriteImage!.colorSpace!,
+                                                 bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
+        //spriteContext.draw(in: CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)), image: spriteImage!)
+        //gz change
+        spriteContext.draw(spriteImage!,
+                           in: CGRect(x: 0,
+                                      y: 0,
+                                      width: CGFloat(width),
+                                      height: CGFloat(height)),
+                           byTiling : true
+        )
+        
+        var texName: GLuint = GLuint()
+        glGenTextures(1, &texName)
+        glBindTexture(GLenum(GL_TEXTURE_2D), texName)
+        
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_NEAREST)
+        glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), UInt32(GL_UNSIGNED_BYTE), spriteData)
+        
+        free(spriteData)
+        return texName
+        
+    }
+    
+    private func renderTextures(){
+        if textureName == nil {return}
+        glActiveTexture(GLenum(GL_TEXTURE0));
+        glBindTexture(GLenum(GL_TEXTURE_2D), texture);
+        glUniform1i(GLint(textureUniform), 0);
     }
 }
 
