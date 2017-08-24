@@ -22,7 +22,7 @@ var Vertices = [
     Vertex(Position: (-1, -1, 0), Color: (0, 0, 0, 1))
 ]
 
-var Indices: [GLubyte] = [
+var Indices: [GLubyte] = [//triangles
     0, 1, 2,
     2, 3, 0
 ]
@@ -33,15 +33,13 @@ class OpenGLView:UIView{
     context:EAGLContext!,
     colorRenderBuffer:GLuint = 1
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.config()
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if context == nil {
+            config()
+        }
     }
     
-    required init(coder: NSCoder) {
-        super.init(coder: coder)!
-        self.config()
-    }
     
     override class var layerClass: AnyClass {
         return CAEAGLLayer.self
@@ -108,7 +106,9 @@ class OpenGLView:UIView{
     //Shaders
     var
     positionSlot: GLuint = 0,
-    colorSlot: GLuint = 0
+    colorSlot: GLuint = 0,
+    iTimeSlot: GLint = 0,
+    iResolution: GLint = 0
     private func compileShader(type: GLenum ,shaderName: String!) -> GLuint{
         
         var shader : GLuint!
@@ -135,21 +135,7 @@ class OpenGLView:UIView{
         
         glGetShaderiv(shader, GLenum(GL_COMPILE_STATUS), &status)
         
-        if status == GL_FALSE {
-            
-            var length: GLint = 0;
-            glGetShaderiv(shader, GLenum(GL_INFO_LOG_LENGTH), &length);
-            
-            let errorLog = unsafeBitCast(malloc(Int(length) * MemoryLayout<GLchar>.size), to:UnsafeMutablePointer<GLchar>.self)
-            glGetShaderInfoLog(shader, length, &length, errorLog)
-            
-            let err = String(cString: errorLog)
-            
-            free(errorLog)
-            glDeleteShader(shader)
-            
-            preconditionFailure("failed to compileShader: \(err)")
-        }
+        prinGlErrors(status,shader,#function)
         
         return shader
     }
@@ -170,9 +156,8 @@ class OpenGLView:UIView{
         // Check for any errors.
         var linkSuccess: GLint = GLint()
         glGetProgramiv(programHandle, GLenum(GL_LINK_STATUS), &linkSuccess)
-        if (linkSuccess == GL_FALSE) {
-            preconditionFailure("Failed to create shader program!")
-        }
+        
+        prinGlErrors(linkSuccess,programHandle,#function)
         
         // Call glUseProgram to tell OpenGL to actually use this program when given vertex info.
         glUseProgram(programHandle)
@@ -183,6 +168,10 @@ class OpenGLView:UIView{
         self.colorSlot = GLuint(glGetAttribLocation(programHandle, "SourceColor"))
         glEnableVertexAttribArray(self.positionSlot)
         glEnableVertexAttribArray(self.colorSlot)
+        
+        
+        self.iTimeSlot = GLint(glGetUniformLocation(programHandle, "iTime"))
+        self.iResolution = GLint(glGetUniformLocation(programHandle, "iResolution"))
     }
     private func setupVBOs() {
         var vertexBuffer: GLuint = 0
@@ -197,22 +186,29 @@ class OpenGLView:UIView{
     }
     private func renderShaders(){
         //shaders
+        setVariablesToShaders()
         glViewport(0, 0, GLint(self.frame.size.width), GLint(self.frame.size.height));
         glVertexAttribPointer(positionSlot, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), nil)
         glVertexAttribPointer(colorSlot, 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), UnsafePointer<Float>(bitPattern: 3 * MemoryLayout<Float>.size))
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
-        
-        //animate
-        let colorValue = 0.5 + 0.5 * sin(Float(CACurrentMediaTime()))
-        let colorValueInv = 0.5 + 0.5 * cos(Float(CACurrentMediaTime()))
-        Vertices = [
-            Vertex(Position: (1, -1, 0) , Color: (colorValue, 0, colorValueInv, colorValue)),
-            Vertex(Position: (1, 1, 0)  , Color: (0, colorValueInv, 0, colorValueInv)),
-            Vertex(Position: (-1, 1, 0) , Color: (colorValue, 0, colorValue, colorValue)),
-            Vertex(Position: (-1, -1, 0), Color: (colorValueInv/2, 0, 0, colorValueInv))
-        ]
-        
-        glBufferData(GLenum(GL_ARRAY_BUFFER), (Vertices.count * MemoryLayout<Vertex>.size), Vertices, GLenum(GL_STATIC_DRAW))
-        
+    }
+    private func setVariablesToShaders(){
+        glUniform1f(iTimeSlot, GLfloat(CACurrentMediaTime()))
+        glUniform3f(iResolution, GLfloat(frame.size.width), GLfloat(frame.size.height), 0)
+    }
+}
+
+extension OpenGLView{
+    fileprivate func prinGlErrors(_ status:Int32,_ shader:GLuint,_ funcName:String){
+        if status == GL_FALSE {
+            var length: GLint = 0;
+            glGetShaderiv(shader, GLenum(GL_INFO_LOG_LENGTH), &length);
+            let errorLog = unsafeBitCast(malloc(Int(length) * MemoryLayout<GLchar>.size), to:UnsafeMutablePointer<GLchar>.self)
+            glGetShaderInfoLog(shader, length, &length, errorLog)
+            let err = String(cString: errorLog)
+            free(errorLog)
+            glDeleteShader(shader)
+            preconditionFailure("failed to \(funcName): \(err)")
+        }
     }
 }
