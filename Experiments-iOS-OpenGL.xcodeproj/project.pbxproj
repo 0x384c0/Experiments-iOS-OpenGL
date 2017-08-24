@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49EEB2D91F4D58D100F41908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2D81F4D58D100F41908 /* AppDelegate.swift */; };
-		49EEB2DB1F4D58D100F41908 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2DA1F4D58D100F41908 /* ViewController.swift */; };
+		49EEB2DB1F4D58D100F41908 /* ShaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */; };
 		49EEB2DE1F4D58D100F41908 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EEB2DC1F4D58D100F41908 /* Main.storyboard */; };
 		49EEB2E31F4D58D100F41908 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EEB2E21F4D58D100F41908 /* Assets.xcassets */; };
 		49EEB2E61F4D58D100F41908 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EEB2E41F4D58D100F41908 /* LaunchScreen.storyboard */; };
@@ -16,12 +16,13 @@
 		49EEB2F11F4D594900F41908 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EEB2F01F4D594900F41908 /* QuartzCore.framework */; };
 		49EEB2F31F4D5B0000F41908 /* OpenGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2F21F4D5B0000F41908 /* OpenGLView.swift */; };
 		49EEB2FF1F4D90F300F41908 /* shaders in Resources */ = {isa = PBXBuildFile; fileRef = 49EEB2FE1F4D90F300F41908 /* shaders */; };
+		49EEB3021F4EC2C600F41908 /* ShaderSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB3011F4EC2C600F41908 /* ShaderSelectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		49EEB2D51F4D58D100F41908 /* Experiments-iOS-OpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Experiments-iOS-OpenGL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EEB2D81F4D58D100F41908 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		49EEB2DA1F4D58D100F41908 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderViewController.swift; sourceTree = "<group>"; };
 		49EEB2DD1F4D58D100F41908 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49EEB2E21F4D58D100F41908 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49EEB2E51F4D58D100F41908 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -31,6 +32,7 @@
 		49EEB2F21F4D5B0000F41908 /* OpenGLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenGLView.swift; sourceTree = "<group>"; };
 		49EEB2F91F4D72B900F41908 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		49EEB2FE1F4D90F300F41908 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shaders; sourceTree = "<group>"; };
+		49EEB3011F4EC2C600F41908 /* ShaderSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderSelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,8 @@
 			children = (
 				49EEB2FE1F4D90F300F41908 /* shaders */,
 				49EEB2D81F4D58D100F41908 /* AppDelegate.swift */,
-				49EEB2DA1F4D58D100F41908 /* ViewController.swift */,
+				49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */,
+				49EEB3011F4EC2C600F41908 /* ShaderSelectViewController.swift */,
 				49EEB2F21F4D5B0000F41908 /* OpenGLView.swift */,
 				49EEB2DC1F4D58D100F41908 /* Main.storyboard */,
 				49EEB2E21F4D58D100F41908 /* Assets.xcassets */,
@@ -170,8 +173,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49EEB2DB1F4D58D100F41908 /* ViewController.swift in Sources */,
+				49EEB2DB1F4D58D100F41908 /* ShaderViewController.swift in Sources */,
 				49EEB2F31F4D5B0000F41908 /* OpenGLView.swift in Sources */,
+				49EEB3021F4EC2C600F41908 /* ShaderSelectViewController.swift in Sources */,
 				49EEB2D91F4D58D100F41908 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

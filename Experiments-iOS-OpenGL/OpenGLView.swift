@@ -33,26 +33,19 @@ class OpenGLView:UIView{
     context:EAGLContext!,
     colorRenderBuffer:GLuint = 1
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if context == nil {
-            config()
-        }
-    }
-    
     
     override class var layerClass: AnyClass {
         return CAEAGLLayer.self
     }
     
     
-    private func config() {
+    func config(shaderName: String) {
         backgroundColor = UIColor.clear
         setupLayer()
         setupContext()
         setupRenderBuffer()
         setupFrameBuffer()
-        compileShaders()
+        compileShaders(shaderName: shaderName)
         setupVBOs()
         render(nil)
         setupDisplayLink()
@@ -140,12 +133,12 @@ class OpenGLView:UIView{
         return shader
     }
     
-    private func compileShaders() {
+    private func compileShaders(shaderName:String) {
         
         // Compile our vertex and fragment shaders.
         let
         vertexShader = compileShader(type: GLenum(GL_VERTEX_SHADER), shaderName: "SimpleVertex"),
-        fragmentShader = compileShader(type: GLenum(GL_FRAGMENT_SHADER), shaderName: "SimpleFragment")
+        fragmentShader = compileShader(type: GLenum(GL_FRAGMENT_SHADER), shaderName: shaderName)
         
         // Call glCreateProgram, glAttachShader, and glLinkProgram to link the vertex and fragment shaders into a complete program.
         let programHandle: GLuint = glCreateProgram()
@@ -208,7 +201,7 @@ extension OpenGLView{
             let err = String(cString: errorLog)
             free(errorLog)
             glDeleteShader(shader)
-            preconditionFailure("failed to \(funcName): \(err)")
+            preconditionFailure("failed to \(funcName):\n\(err)")
         }
     }
 }
