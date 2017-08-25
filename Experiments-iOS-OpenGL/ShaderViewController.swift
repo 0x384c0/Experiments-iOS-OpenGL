@@ -22,20 +22,27 @@ class ShaderViewController: UIViewController {
         switch shaderName {
         case "Clouds":
             textureName = "RGBA_noize_med"
-            skipFrames = 30 * 5
+            skipFrames = Int(30.0 * 0.3)
         case "MengerSponge","Seascape":
-            skipFrames = 30 * 3
+            skipFrames = Int(30.0 * 0.3)
         default: break
         }
     }
     
-    override func viewDidLoad(){
-        super.viewDidLoad()
-        view.layoutSubviews()
+    private var animationLaunched = false
+    override func viewDidAppear(_ animated: Bool) {
+        if animationLaunched {return}
+        animationLaunched = true
+        
         let shaderFolder = "shaders/"
         let shaderPath = Bundle.main.path(forResource: shaderFolder + shaderName, ofType: "glsl")!
         let ShaderString = try! String(contentsOfFile: shaderPath, encoding: .utf8)
         textField.text = ShaderString
         glView.config(shaderName:shaderName,textureName:textureName, skipFrames: skipFrames)
+    }
+    
+    
+    deinit {
+        glView.handleDeinit()
     }
 }

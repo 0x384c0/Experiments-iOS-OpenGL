@@ -1,16 +1,16 @@
-varying lowp vec4 DestinationColor;
-uniform lowp float iTime;
-uniform lowp vec3 iResolution;
+varying highp vec4 DestinationColor;
+uniform highp float iTime;
+uniform highp vec3 iResolution;
 
 #define t iTime
 #define r iResolution.xy
 
 //shadertoy function
-void mainImage( out lowp vec4 fragColor, in lowp vec2 fragCoord ) {
-    lowp vec3 c;
-    lowp float l,z=t;
+void mainImage( out highp vec4 fragColor, in highp vec2 fragCoord ) {
+    highp vec3 c;
+    highp float l,z=t;
     for(int i=0;i<3;i++) {
-        lowp vec2 uv,p=fragCoord.xy/r;
+        highp vec2 uv,p=fragCoord.xy/r;
         uv=p;
         p-=.5;
         p.x*=r.x/r.y;

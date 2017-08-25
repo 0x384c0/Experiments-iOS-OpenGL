@@ -51,7 +51,7 @@ class OpenGLView:UIView{
         setupFrameBuffer()
         compileShaders(shaderName: shaderName)
         setupVBOs()
-        render(nil)
+        render()
         setupDisplayLink()
     }
     
@@ -69,6 +69,11 @@ class OpenGLView:UIView{
         } else {
             preconditionFailure("failed to initial opengl context")
         }
+        
+        //background color
+        glClearColor(0, 0, 0, 0.0)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        glViewport(0, 0, GLint(self.frame.size.width), GLint(self.frame.size.height));
     }
     private func setupRenderBuffer() {
         glGenRenderbuffers(1, &colorRenderBuffer)
@@ -81,22 +86,21 @@ class OpenGLView:UIView{
         glBindFramebuffer(GLenum(GL_FRAMEBUFFER), frameBuffer)
         glFramebufferRenderbuffer(GLenum(GL_FRAMEBUFFER), GLenum(GL_COLOR_ATTACHMENT0), GLenum(GL_RENDERBUFFER), colorRenderBuffer)
     }
+    
+    private var link:CADisplayLink?
     private func setupDisplayLink(){
-        let link = CADisplayLink(target: self, selector: #selector(render(_:)))
-        link.add(to: RunLoop.current, forMode: .defaultRunLoopMode)
+        link = CADisplayLink(target: self, selector: #selector(renderFrame))
+        link?.add(to: RunLoop.current, forMode: .defaultRunLoopMode)
     }
     
     private var skippedFrames = 0
-    @objc private func render(_ obj:Any?) {
+    private func render() {
         if skippedFrames >= skipFrames{
             skippedFrames = 0
         } else {
             skippedFrames += 1
             return
         }
-        //background color
-        glClearColor(0, 0, 0, 0.0)
-        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
         
         renderShaders()
         renderTextures()
@@ -105,7 +109,18 @@ class OpenGLView:UIView{
         if !success{
             preconditionFailure("failed to presentRenderbuffer")
         }
-        
+    }
+    @objc func renderFrame(){
+        if resolutionDidNotSet {return}
+        render()
+    }
+    
+    deinit {
+        handleDeinit()
+    }
+    func handleDeinit(){
+        link?.invalidate()
+        link = nil
     }
     
     //Shaders
@@ -190,17 +205,27 @@ class OpenGLView:UIView{
         glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer)
         glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), (Indices.count * MemoryLayout<GLubyte>.size), Indices, GLenum(GL_STATIC_DRAW))
     }
+    
+    private var isShadersNotRendered = true
     private func renderShaders(){
         //shaders
         setVariablesToShaders()
-        glViewport(0, 0, GLint(self.frame.size.width), GLint(self.frame.size.height));
-        glVertexAttribPointer(positionSlot, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), nil)
-        glVertexAttribPointer(colorSlot, 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), UnsafePointer<Float>(bitPattern: 3 * MemoryLayout<Float>.size))
+        
+        if isShadersNotRendered{
+            isShadersNotRendered = false
+            glVertexAttribPointer(positionSlot, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), nil)
+            glVertexAttribPointer(colorSlot, 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), UnsafePointer<Float>(bitPattern: 3 * MemoryLayout<Float>.size))
+        }
+        
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
     }
+    private var resolutionDidNotSet = true
     private func setVariablesToShaders(){
         glUniform1f(iTimeSlot, GLfloat(CACurrentMediaTime()))
-        glUniform3f(iResolution, GLfloat(frame.size.width), GLfloat(frame.size.height), 0)
+        if resolutionDidNotSet{
+            glUniform3f(iResolution, GLfloat(frame.size.width), GLfloat(frame.size.height), 0)
+            resolutionDidNotSet = false
+        }
     }
     
     //textures
@@ -251,7 +276,11 @@ class OpenGLView:UIView{
         glGenTextures(1, &texName)
         glBindTexture(GLenum(GL_TEXTURE_2D), texName)
         
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_NEAREST)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_REPEAT)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_REPEAT)
+        
         glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), UInt32(GL_UNSIGNED_BYTE), spriteData)
         
         free(spriteData)
