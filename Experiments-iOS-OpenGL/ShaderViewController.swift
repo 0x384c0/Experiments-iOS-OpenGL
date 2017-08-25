@@ -23,7 +23,7 @@ class ShaderViewController: UIViewController {
         case "Clouds":
             textureName = "RGBA_noize_med"
             skipFrames = 30 * 5
-        case "MengerSponge":
+        case "MengerSponge","Seascape":
             skipFrames = 30 * 3
         default: break
         }
