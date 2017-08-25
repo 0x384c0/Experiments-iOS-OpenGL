@@ -5,14 +5,8 @@ highp vec4 iMouse = vec4(1.0,1.0,1.0,1.0);   // mouse pixel coords. xy: current 
 uniform sampler2D iChannel0;        // input channel. XX = 2D/Cube
 
 highp vec4 textureLod(sampler2D sampler,highp vec2 par1, highp float par2){
-	highp vec4 result = texture2D(sampler,par1,par2);
-    result.x = result.x - 0.1;
-    result.y = result.y + 0.1;
-    //TODO:
-    //Filter linear
-    //Wrap repeat
-    //VFlip
-	return result;
+    highp vec4 result = texture2D(sampler,par1,par2);
+    return result;
 }
 
 highp float noise( in highp vec3 x )

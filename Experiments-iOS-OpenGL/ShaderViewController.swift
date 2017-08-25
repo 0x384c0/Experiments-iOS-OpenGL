@@ -20,7 +20,7 @@ class ShaderViewController: UIViewController {
     func setup(shaderName:String){
         self.shaderName = shaderName
         switch shaderName {
-        case "Clouds":
+        case "Clouds","TextureFragment":
             textureName = "RGBA_noize_med"
             skipFrames = Int(30.0 * 0.3)
         case "MengerSponge","Seascape":

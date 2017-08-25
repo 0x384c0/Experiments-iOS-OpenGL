@@ -8,6 +8,7 @@
 import UIKit
 import QuartzCore
 import OpenGLES
+import GLKit
 
 
 struct Vertex {
@@ -50,6 +51,7 @@ class OpenGLView:UIView{
         setupRenderBuffer()
         setupFrameBuffer()
         compileShaders(shaderName: shaderName)
+        setuptextures()
         setupVBOs()
         render()
         setupDisplayLink()
@@ -103,7 +105,6 @@ class OpenGLView:UIView{
         }
         
         renderShaders()
-        renderTextures()
         
         let success = context.presentRenderbuffer(Int(GL_RENDERBUFFER))
         if !success{
@@ -231,68 +232,33 @@ class OpenGLView:UIView{
     //textures
     var
     textureName:String?,
-    texture:GLuint = 0,
-    textureUniform:GLuint = 0
+    textureSlot:GLint = 0
     private func addTextureToShader(_ programHandle:GLuint){
         if textureName == nil {return}
-        textureUniform = GLuint(glGetUniformLocation(programHandle, "iChannel0"))
+        textureSlot = GLint(glGetUniformLocation(programHandle, "iChannel0"))
     }
     private func setuptextures(){
         if let textureName = textureName{
-            texture = setupTexture(textureName)
+            setupTexture(textureName)
         }
-    }
-    private func setupTexture(_ fileName: String) -> GLuint{
-        let folder = "presets/"
-        let spriteImage: CGImage? = UIImage(named: folder + fileName + ".png")?.cgImage
-        if (spriteImage == nil) {
-            preconditionFailure("Failed to load image!")
-        }
-        let width: Int = spriteImage!.width
-        let height: Int = spriteImage!.height
-        //let spriteData = UnsafeMutablePointer<GLubyte>(calloc(Int(UInt(CGFloat(width) * CGFloat(height) * 4)), sizeof(GLubyte)))
-        //gz change
-        let spriteData = UnsafeMutablePointer<GLubyte>.allocate(capacity:Int(UInt(CGFloat(width) * CGFloat(height) * 4)))
-        
-        
-        let spriteContext: CGContext = CGContext(data: spriteData,
-                                                 width: width,
-                                                 height: height,
-                                                 bitsPerComponent: 8,
-                                                 bytesPerRow: width*4,
-                                                 space: spriteImage!.colorSpace!,
-                                                 bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
-        //spriteContext.draw(in: CGRect(x: 0, y: 0, width: CGFloat(width), height: CGFloat(height)), image: spriteImage!)
-        //gz change
-        spriteContext.draw(spriteImage!,
-                           in: CGRect(x: 0,
-                                      y: 0,
-                                      width: CGFloat(width),
-                                      height: CGFloat(height)),
-                           byTiling : true
-        )
-        
-        var texName: GLuint = GLuint()
-        glGenTextures(1, &texName)
-        glBindTexture(GLenum(GL_TEXTURE_2D), texName)
-        
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR)
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_REPEAT)
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_REPEAT)
-        
-        glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA, GLsizei(width), GLsizei(height), 0, GLenum(GL_RGBA), UInt32(GL_UNSIGNED_BYTE), spriteData)
-        
-        free(spriteData)
-        return texName
-        
     }
     
-    private func renderTextures(){
-        if textureName == nil {return}
+    private func setupTexture(_ fileName: String){
+        do {
+            let _ = try GLKTextureLoader.texture(with: UIImage(named:fileName)!.cgImage!, options: nil)
+        } catch {
+            print((error as NSError).localizedDescription)
+        }
+        
+        let spriteTexture = try! GLKTextureLoader.texture(with: UIImage(named:fileName)!.cgImage!, options: nil)
+        
         glActiveTexture(GLenum(GL_TEXTURE0));
-        glBindTexture(GLenum(GL_TEXTURE_2D), texture);
-        glUniform1i(GLint(textureUniform), 0);
+        glBindTexture(GLenum(GL_TEXTURE_2D), spriteTexture.name);
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_REPEAT);
+        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_REPEAT);
+        glUniform1i(textureSlot, 0);
+        
     }
 }
 
