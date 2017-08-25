@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49A7FA1C1F4EDDD8004F8C5A /* presets in Resources */ = {isa = PBXBuildFile; fileRef = 49A7FA1B1F4EDDD8004F8C5A /* presets */; };
+		49A7FA201F4FEDEB004F8C5A /* images in Resources */ = {isa = PBXBuildFile; fileRef = 49A7FA1F1F4FEDEB004F8C5A /* images */; };
 		49EEB2D91F4D58D100F41908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2D81F4D58D100F41908 /* AppDelegate.swift */; };
 		49EEB2DB1F4D58D100F41908 /* ShaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */; };
 		49EEB2DE1F4D58D100F41908 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EEB2DC1F4D58D100F41908 /* Main.storyboard */; };
@@ -22,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		49A7FA1B1F4EDDD8004F8C5A /* presets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = presets; sourceTree = "<group>"; };
+		49A7FA1E1F4FEDD7004F8C5A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		49A7FA1F1F4FEDEB004F8C5A /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = SOURCE_ROOT; };
 		49EEB2D51F4D58D100F41908 /* Experiments-iOS-OpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Experiments-iOS-OpenGL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EEB2D81F4D58D100F41908 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 		49EEB2D71F4D58D100F41908 /* Experiments-iOS-OpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				49A7FA1F1F4FEDEB004F8C5A /* images */,
 				49A7FA1B1F4EDDD8004F8C5A /* presets */,
 				49EEB2FE1F4D90F300F41908 /* shaders */,
 				49EEB2D81F4D58D100F41908 /* AppDelegate.swift */,
@@ -79,6 +83,7 @@
 				49EEB2DC1F4D58D100F41908 /* Main.storyboard */,
 				49EEB2E21F4D58D100F41908 /* Assets.xcassets */,
 				49EEB2E41F4D58D100F41908 /* LaunchScreen.storyboard */,
+				49A7FA1E1F4FEDD7004F8C5A /* README.md */,
 				49EEB3001F4D910100F41908 /* Supporting Files */,
 			);
 			path = "Experiments-iOS-OpenGL";
@@ -162,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49A7FA201F4FEDEB004F8C5A /* images in Resources */,
 				49EEB2E61F4D58D100F41908 /* LaunchScreen.storyboard in Resources */,
 				49EEB2FF1F4D90F300F41908 /* shaders in Resources */,
 				49A7FA1C1F4EDDD8004F8C5A /* presets in Resources */,
