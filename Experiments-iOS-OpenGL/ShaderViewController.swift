@@ -18,12 +18,13 @@ class ShaderViewController: UIViewController {
     textureName:String?,
     skipFrames = 0
     func setup(shaderName:String){
+        navigationItem.title = shaderName
         self.shaderName = shaderName
         switch shaderName {
         case "Clouds","TextureFragment":
             textureName = "RGBA_noize_med"
             skipFrames = Int(30.0 * 0.3)
-        case "MengerSponge","Seascape":
+        case "MengerSponge","Seascape","TheDriveHome":
             skipFrames = Int(30.0 * 0.3)
         default: break
         }
