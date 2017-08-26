@@ -33,7 +33,7 @@ class ShaderGLKitViewController: GLKViewController {
         program = glCreateProgram()
         let
         vertShader = Shader(name: "SimpleVertex", type: GL_VERTEX_SHADER),
-        fragShader = Shader(name: "SimpleFragment", type: GL_FRAGMENT_SHADER)
+        fragShader = Shader(name: "Veryfastproceduralocean", type: GL_FRAGMENT_SHADER)
         
         //attach
         glAttachShader(program, vertShader.id)
@@ -82,7 +82,7 @@ class ShaderGLKitViewController: GLKViewController {
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        glUniform1f(iTimeSlot, GLfloat(CACurrentMediaTime() * 5))
+        glUniform1f(iTimeSlot, GLfloat(CACurrentMediaTime()))
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
     }
     
@@ -96,8 +96,23 @@ class Shader{
         type = GLenum(type),
         shaderFolder = "shaders/",
         shaderPath = Bundle.main.path(forResource: shaderFolder + name, ofType: "glsl")!,
-        shaderString = try! String(contentsOfFile: shaderPath, encoding: .utf8),
-        cString = shaderString.cString(using: String.Encoding.utf8)
+        shaderStringTmp = try! String(contentsOfFile: shaderPath, encoding: .utf8)
+        let shaderString:String
+        if type == GLenum(GL_FRAGMENT_SHADER){
+            shaderString = shaderStringTmp
+                .replacingOccurrences(of: "vec2 ",          with: "highp vec2 ")
+                .replacingOccurrences(of: "vec3 ",          with: "highp vec3 ")
+                .replacingOccurrences(of: "vec4 ",          with: "highp vec4 ")
+                .replacingOccurrences(of: "mat2 ",          with: "highp mat2 ")
+                .replacingOccurrences(of: "mat3 ",          with: "highp mat3 ")
+                .replacingOccurrences(of: "mat4 ",          with: "highp mat4 ")
+                .replacingOccurrences(of: "float ",         with: "highp float ")
+                .replacingOccurrences(of: "ihighp ",        with: "highp i")
+                .replacingOccurrences(of: "highp highp ",   with: "highp ")
+        } else {
+            shaderString = shaderStringTmp
+        }
+        let cString = shaderString.cString(using: String.Encoding.utf8)
         var
         sourceLength = GLint(shaderString.lengthOfBytes(using: String.Encoding.utf8)),
         tempString : UnsafePointer<GLchar>? =  UnsafePointer<GLchar>(cString),
@@ -121,5 +136,12 @@ class Shader{
             glDeleteShader(shader)
             preconditionFailure("failed to \(funcName):\n\(err)")
         }
+    }
+}
+
+
+extension String{
+    var utf8:String{
+        return String(describing: cString(using: .utf8))
     }
 }
