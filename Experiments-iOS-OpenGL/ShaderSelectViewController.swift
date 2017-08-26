@@ -13,10 +13,16 @@ class ShaderSelectViewController: UITableViewController {
         performSegue(withIdentifier: ShaderViewController.segueID, sender: shaderName!)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let
-        vc = segue.destination as! ShaderViewController,
-        shaderName = sender as! String
-        
-        vc.setup(shaderName: shaderName)
+        switch segue.identifier ?? "" {
+        case ShaderViewController.segueID:
+            
+            let
+            vc = segue.destination as! ShaderViewController,
+            shaderName = sender as! String
+            
+            vc.setup(shaderName: shaderName)
+        default: break
+            
+        }
     }
 }

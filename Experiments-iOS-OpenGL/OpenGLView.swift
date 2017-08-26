@@ -16,14 +16,14 @@ struct Vertex {
     var Color: (CFloat, CFloat, CFloat, CFloat)
 }
 
-var Vertices = [
+let Vertices = [
     Vertex(Position: (1, -1, 0) , Color: (1, 0, 0, 1)),
     Vertex(Position: (1, 1, 0)  , Color: (0, 1, 0, 1)),
     Vertex(Position: (-1, 1, 0) , Color: (0, 0, 1, 1)),
     Vertex(Position: (-1, -1, 0), Color: (0, 0, 0, 1))
 ]
 
-var Indices: [GLubyte] = [//triangles
+let Indices: [GLubyte] = [//triangles
     0, 1, 2,
     2, 3, 0
 ]
@@ -127,7 +127,6 @@ class OpenGLView:UIView{
     //Shaders
     private var
     positionSlot: GLuint = 0,
-    colorSlot: GLuint = 0,
     iTimeSlot: GLint = 0,
     iResolution: GLint = 0
     private func compileShader(type: GLenum ,shaderName: String!) -> GLuint{
@@ -137,7 +136,6 @@ class OpenGLView:UIView{
         var source : UnsafePointer<GLchar>?
         
         let shaderFolder = "shaders/"
-        
         let shaderPath = Bundle.main.path(forResource: shaderFolder + shaderName, ofType: "glsl")!
         let ShaderString = try! String(contentsOfFile: shaderPath, encoding: .utf8)
         
@@ -186,9 +184,7 @@ class OpenGLView:UIView{
         // Finally, call glGetAttribLocation to get a pointer to the input values for the vertex shader, so we
         //  can set them in code. Also call glEnableVertexAttribArray to enable use of these arrays (they are disabled by default).
         self.positionSlot = GLuint(glGetAttribLocation(programHandle, "Position"))
-        self.colorSlot = GLuint(glGetAttribLocation(programHandle, "SourceColor"))
         glEnableVertexAttribArray(self.positionSlot)
-        glEnableVertexAttribArray(self.colorSlot)
         
         
         iTimeSlot = GLint(glGetUniformLocation(programHandle, "iTime"))
@@ -215,7 +211,6 @@ class OpenGLView:UIView{
         if isShadersNotRendered{
             isShadersNotRendered = false
             glVertexAttribPointer(positionSlot, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), nil)
-            glVertexAttribPointer(colorSlot, 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), UnsafePointer<Float>(bitPattern: 3 * MemoryLayout<Float>.size))
         }
         
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)

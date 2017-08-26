@@ -193,7 +193,13 @@
                             <outlet property="delegate" destination="n1h-L7-13z" id="4vd-H0-7ek"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="shaders" id="NT7-hd-UZc"/>
+                    <navigationItem key="navigationItem" title="shaders" id="NT7-hd-UZc">
+                        <barButtonItem key="rightBarButtonItem" title="GLKit" id="Gxb-6J-1MT">
+                            <connections>
+                                <segue destination="bXm-9g-9eZ" kind="show" id="rb9-8W-3SO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="ShaderViewController" id="tce-I9-dMe"/>
                     </connections>
@@ -201,6 +207,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nMa-7V-AHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="232.80000000000001" y="122.78860569715144"/>
+        </scene>
+        <!--GLKit View Controller-->
+        <scene sceneID="ulN-KY-FA3">
+            <objects>
+                <glkViewController preferredFramesPerSecond="60" id="bXm-9g-9eZ" customClass="ShaderGLKitViewController" customModule="Experiments_iOS_OpenGL" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Yea-mi-SZl"/>
+                        <viewControllerLayoutGuide type="bottom" id="wIc-nC-NXt"/>
+                    </layoutGuides>
+                    <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" drawableDepthFormat="24" drawableStencilFormat="8" drawableMultisample="4X" enableSetNeedsDisplay="NO" id="TBd-3N-vtf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="bXm-9g-9eZ" id="1eZ-90-xvR"/>
+                        </connections>
+                    </glkView>
+                </glkViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aSp-nP-tRL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1055" y="949"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TeE-oa-yMF">

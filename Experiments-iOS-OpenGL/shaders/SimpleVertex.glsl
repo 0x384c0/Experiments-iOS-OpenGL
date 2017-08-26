@@ -1,9 +1,6 @@
 attribute vec4 Position;
-attribute vec4 SourceColor;
 
-varying vec4 DestinationColor;
 
-void main(void) { 
-    DestinationColor = SourceColor;
+void main(void) {
     gl_Position = Position;
 }

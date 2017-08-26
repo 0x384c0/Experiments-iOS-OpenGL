@@ -1,4 +1,4 @@
-varying highp vec4 DestinationColor;
+
 uniform highp float iTime;
 uniform highp vec3 iResolution;
 highp vec4 iMouse = vec4(1.0,1.0,1.0,1.0);   // mouse pixel coords. xy: current (if MLB down), zw: click //TODO: replace with touch recognizer

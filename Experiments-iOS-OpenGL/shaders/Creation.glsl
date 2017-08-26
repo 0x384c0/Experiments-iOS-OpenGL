@@ -1,4 +1,4 @@
-varying highp vec4 DestinationColor;
+
 uniform highp float iTime;
 uniform highp vec3 iResolution;
 
