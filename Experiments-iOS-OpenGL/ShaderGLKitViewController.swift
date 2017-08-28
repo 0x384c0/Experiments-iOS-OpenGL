@@ -33,7 +33,7 @@ class ShaderGLKitViewController: GLKViewController {
         program = glCreateProgram()
         let
         vertShader = Shader(name: "SimpleVertex", type: GL_VERTEX_SHADER),
-        fragShader = Shader(name: "Veryfastproceduralocean", type: GL_FRAGMENT_SHADER)
+        fragShader = Shader(name: "Creation", type: GL_FRAGMENT_SHADER)
         
         //attach
         glAttachShader(program, vertShader.id)
@@ -82,10 +82,34 @@ class ShaderGLKitViewController: GLKViewController {
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        glUniform1f(iTimeSlot, GLfloat(CACurrentMediaTime()))
-        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
+        render()
     }
     
+    var startTime = CACurrentMediaTime()
+    func render(){
+        let currentTime = CACurrentMediaTime()
+        let mediaTime = Float((currentTime - startTime))
+        if mediaTime > 10000 {startTime = currentTime}
+        glUniform1f(iTimeSlot, mediaTime)
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
+        printFPS()
+    }
+    
+    var
+    oldDate = Date(),
+    fps = 0
+    func printFPS(){
+        let
+        newDate = Date(),
+        dateDiff = newDate.timeIntervalSince(oldDate)
+        if dateDiff > 1{
+            oldDate = newDate
+            print(fps)
+            fps = 0
+        } else {
+            fps += 1
+        }
+    }
 }
 
 class Shader{

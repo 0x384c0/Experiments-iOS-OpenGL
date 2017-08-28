@@ -16,16 +16,15 @@ class ShaderViewController: UIViewController {
     private var
     shaderName = "",
     textureName:String?,
-    skipFrames = 0
+    isOpaque = true
     func setup(shaderName:String){
         navigationItem.title = shaderName
         self.shaderName = shaderName
         switch shaderName {
         case "Clouds","TextureFragment":
             textureName = "RGBA_noize_med"
-            skipFrames = Int(30.0 * 0.3)
-        case "MengerSponge","Seascape","TheDriveHome":
-            skipFrames = Int(30.0 * 0.3)
+        case "SimpleFragment":
+            isOpaque = false
         default: break
         }
     }
@@ -39,7 +38,7 @@ class ShaderViewController: UIViewController {
         let shaderPath = Bundle.main.path(forResource: shaderFolder + shaderName, ofType: "glsl")!
         let ShaderString = try! String(contentsOfFile: shaderPath, encoding: .utf8)
         textField.text = ShaderString
-        glView.config(shaderName:shaderName,textureName:textureName, skipFrames: skipFrames)
+        glView.config(shaderName:shaderName,textureName:textureName, isOpaque: isOpaque)
     }
     
     

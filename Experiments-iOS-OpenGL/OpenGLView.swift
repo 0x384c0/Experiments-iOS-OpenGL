@@ -33,7 +33,7 @@ class OpenGLView:UIView{
     eaglLayer:CAEAGLLayer!,
     context:EAGLContext!,
     colorRenderBuffer:GLuint = 1,
-    skipFrames = 0
+    glViewIsOpaque = true
     
     
     override class var layerClass: AnyClass {
@@ -41,10 +41,9 @@ class OpenGLView:UIView{
     }
     
     
-    func config(shaderName: String,textureName:String?,skipFrames:Int) {
+    func config(shaderName: String,textureName:String?,isOpaque:Bool = true) {
         self.textureName = textureName
-        self.skipFrames = skipFrames
-        self.skippedFrames = skipFrames
+        self.glViewIsOpaque = isOpaque
         backgroundColor = UIColor.clear
         setupLayer()
         setupContext()
@@ -59,7 +58,7 @@ class OpenGLView:UIView{
     
     private func setupLayer(){
         eaglLayer = layer as! CAEAGLLayer
-        eaglLayer.isOpaque = skipFrames != 0 //make transparent
+        eaglLayer.isOpaque = glViewIsOpaque
         backgroundColor = UIColor.clear
     }
     private func setupContext(){
@@ -95,14 +94,7 @@ class OpenGLView:UIView{
         link?.add(to: RunLoop.current, forMode: .defaultRunLoopMode)
     }
     
-    private var skippedFrames = 0
     private func render() {
-        if skippedFrames >= skipFrames{
-            skippedFrames = 0
-        } else {
-            skippedFrames += 1
-            return
-        }
         
         renderShaders()
         
@@ -231,8 +223,14 @@ class OpenGLView:UIView{
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
     }
     private var resolutionDidNotSet = true
+    
+    
+    var startTime = CACurrentMediaTime()
     private func setVariablesToShaders(){
-        glUniform1f(iTimeSlot, GLfloat(CACurrentMediaTime()))
+        let currentTime = CACurrentMediaTime()
+        let mediaTime = Float((currentTime - startTime))
+        if mediaTime > 10000 {startTime = currentTime}
+        glUniform1f(iTimeSlot, mediaTime)
         if resolutionDidNotSet{
             glUniform3f(iResolution, GLfloat(frame.size.width), GLfloat(frame.size.height), 0)
             resolutionDidNotSet = false
