@@ -1,12 +1,9 @@
-
-uniform float iTime;
-uniform vec3 iResolution;
+// http://www.pouet.net/prod.php?which=57245
 
 #define t iTime
 #define r iResolution.xy
 
-//shadertoy function
-void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+void mainImage( out vec4 fragColor, in vec2 fragCoord ){
     vec3 c;
     float l,z=t;
     for(int i=0;i<3;i++) {
@@ -20,8 +17,4 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         c[i]=.01/length(abs(mod(uv,1.)-.5));
     }
     fragColor=vec4(c/l,t);
-}
-
-void main(void) {
-    mainImage(gl_FragColor,gl_FragCoord.xy);
 }

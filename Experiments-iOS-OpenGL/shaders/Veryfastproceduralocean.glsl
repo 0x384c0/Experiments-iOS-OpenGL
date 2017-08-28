@@ -1,7 +1,6 @@
-uniform float iTime;
-uniform vec3 iResolution;
-vec4 iMouse = vec4(1.0,1.0,1.0,1.0);
+//afl_ext 2017
 
+// its from here https://github.com/achlubek/venginenative/blob/master/shaders/include/WaterHeight.glsl
 float wave(vec2 uv, vec2 emitter, float speed, float phase){
     float dst = distance(uv, emitter);
     return pow((0.5 + 0.5 * sin(dst * phase - iTime * speed)), 5.0);
@@ -138,9 +137,4 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     C = normalize(C) * sqrt(length(C));
     
     fragColor = vec4(C,1.0);
-}
-
-
-void main(void) {
-    mainImage(gl_FragColor,gl_FragCoord.xy);
 }

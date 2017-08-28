@@ -21,7 +21,7 @@ protocol ShaderToyRenderer:class{
 extension ShaderToyRenderer{
     func compileShaders(shaderName:String,program:GLuint) {
         let
-        vertShader = Shader(name: "SimpleVertex", type: GL_VERTEX_SHADER),
+        vertShader = Shader(name: "_SimpleVertex", type: GL_VERTEX_SHADER),
         fragShader = Shader(name: shaderName, type: GL_FRAGMENT_SHADER)
         
         //attach

@@ -1,7 +1,8 @@
-
-uniform float iTime;
-uniform vec3 iResolution;
-vec4 iMouse = vec4(1.0,1.0,1.0,1.0);   // mouse pixel coords. xy: current (if MLB down), zw: click //TODO: replace with touch recognizer
+/*
+ * "Seascape" by Alexander Alekseev aka TDM - 2014
+ * License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+ * Contact: tdmaav@gmail.com
+ */
 
 const int NUM_STEPS = 8;
 const float PI	 	= 3.141592;
@@ -152,10 +153,7 @@ float heightMapTracing(vec3 ori, vec3 dir, out vec3 p) {
     return tmid;
 }
 
-
-
-
-//shadertoy function
+// main
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     vec2 uv = fragCoord.xy / iResolution.xy;
     uv = uv * 2.0 - 1.0;
@@ -183,9 +181,4 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     
     // post
     fragColor = vec4(pow(color,vec3(0.75)), 1.0);
-}
-
-
-void main(void) {
-    mainImage(gl_FragColor,gl_FragCoord.xy);
 }

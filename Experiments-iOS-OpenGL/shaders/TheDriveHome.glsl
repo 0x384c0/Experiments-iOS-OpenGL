@@ -1,7 +1,24 @@
-
-uniform float iTime;
-uniform vec3 iResolution;
-vec4 iMouse = vec4(1.0,1.0,1.0,1.0);
+// "The Drive Home" by Martijn Steinrucken aka BigWings/CountFrolic - 2017
+// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+//
+// I was looking for something 3d, that can be made just with a point-line distance function.
+// Then I saw the cover graphic of the song I'm using here on soundcloud, which is a bokeh traffic
+// shot which is a perfect for for what I was looking for.
+//
+// It took me a while to get to a satisfying rain effect. Most other people use a render buffer for
+// this so that is how I started. In the end though, I got a better effect without. Uncomment the
+// DROP_DEBUG define to get a better idea of what is going on.
+//
+// If you are watching this on a weaker device, you can uncomment the HIGH_QUALITY define
+//
+// Music:
+// Mr. Bill - Cheyah (Zefora's digital rain remix)
+// https://soundcloud.com/zefora/cheyah
+//
+// Video can be found here:
+// https://www.youtube.com/watch?v=WrxZ4AZPdOQ
+//
+//
 
 #define S(x, y, z) smoothstep(x, y, z)
 #define B(a, b, edge, t) S(a-edge, a+edge, t)*S(b+edge, b-edge, t)
@@ -142,7 +159,7 @@ void CameraSetup(vec2 uv, vec3 pos, vec3 lookat, float zoom, float m) {
     float s = sin(x);
     float c = cos(x);
     
-    mat2  rot = mat2(c, -s, s, c);
+    mat2 rot = mat2(c, -s, s, c);
     
 #ifndef DROP_DEBUG
     dropUv = uv*rot;
@@ -285,9 +302,8 @@ vec3 EnvironmentLights(float i, float t) {
     return m*col*.2;
 }
 
-
-//shadertoy function
-void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
     float t = iTime;
     vec3 col = vec3(0.);
     vec2 uv = fragCoord.xy / iResolution.xy; // 0 <> 1
@@ -351,8 +367,4 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     col += sat(rd.y)*vec3(.6, .5, .9);
     
     fragColor = vec4(col, 0.);
-}
-
-void main(void) {
-    mainImage(gl_FragColor,gl_FragCoord.xy);
 }
