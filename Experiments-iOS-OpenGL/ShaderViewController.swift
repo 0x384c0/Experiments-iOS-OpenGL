@@ -9,24 +9,14 @@
 import UIKit
 
 class ShaderViewController: UIViewController {
-    class var segueID:String {return String(describing:self)}
     @IBOutlet weak var glView: OpenGLView!
     @IBOutlet weak var textField: UITextView!
     
     private var
-    shaderName = "",
-    textureName:String?,
-    isOpaque = true
-    func setup(shaderName:String){
-        navigationItem.title = shaderName
-        self.shaderName = shaderName
-        switch shaderName {
-        case "Clouds","TextureFragment":
-            textureName = "RGBA_noize_med"
-        case "SimpleFragment":
-            isOpaque = false
-        default: break
-        }
+    settings:ShaderSettings?
+    func setup(_ settings:ShaderSettings){
+        navigationItem.title = settings.shaderName
+        self.settings = settings
     }
     
     private var animationLaunched = false
@@ -35,10 +25,10 @@ class ShaderViewController: UIViewController {
         animationLaunched = true
         
         let shaderFolder = "shaders/"
-        let shaderPath = Bundle.main.path(forResource: shaderFolder + shaderName, ofType: "glsl")!
-        let ShaderString = try! String(contentsOfFile: shaderPath, encoding: .utf8)
-        textField.text = ShaderString
-        glView.config(shaderName:shaderName,textureName:textureName, isOpaque: isOpaque)
+        let shaderPath = Bundle.main.path(forResource: shaderFolder + settings!.shaderName, ofType: "glsl")!
+        textField.text = try! String(contentsOfFile: shaderPath, encoding: .utf8)
+        
+        glView.config(shaderName:settings!.shaderName, textureName:settings!.textureName, isOpaque: settings!.isOpaque)
     }
     
     

@@ -53,7 +53,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055.2" y="122.78860569715144"/>
+            <point key="canvasLocation" x="1633" y="-214"/>
         </scene>
         <!--shaders-->
         <scene sceneID="O04-ZS-zgE">
@@ -211,14 +211,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="shaders" id="NT7-hd-UZc">
-                        <barButtonItem key="rightBarButtonItem" title="GLKit" id="Gxb-6J-1MT">
-                            <connections>
-                                <segue destination="bXm-9g-9eZ" kind="show" id="rb9-8W-3SO"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="nBo-hW-USf">
+                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="hkl-aV-WZP">
+                                <rect key="frame" x="310" y="6" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="fullScreenSwitch:" destination="n1h-L7-13z" eventType="valueChanged" id="97I-V5-3Gj"/>
+                                </connections>
+                            </switch>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="ShaderViewController" id="tce-I9-dMe"/>
+                        <segue destination="bXm-9g-9eZ" kind="show" identifier="ShaderGLKitViewController" id="7KU-oq-AjO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nMa-7V-AHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -243,7 +248,7 @@
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSp-nP-tRL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055" y="949"/>
+            <point key="canvasLocation" x="1633" y="458"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TeE-oa-yMF">

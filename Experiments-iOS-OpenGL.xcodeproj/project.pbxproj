@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4940AACA1F5139D1000C9091 /* ShaderGLKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940AAC91F5139D1000C9091 /* ShaderGLKitViewController.swift */; };
 		4940AACC1F51408F000C9091 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4940AACB1F51408F000C9091 /* GLKit.framework */; };
+		49602FA21F53DC3E00B08BE9 /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49602FA11F53DC3E00B08BE9 /* Shader.swift */; };
+		49602FA61F54052600B08BE9 /* ShaderToyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49602FA51F54052600B08BE9 /* ShaderToyRenderer.swift */; };
 		49A7FA201F4FEDEB004F8C5A /* images in Resources */ = {isa = PBXBuildFile; fileRef = 49A7FA1F1F4FEDEB004F8C5A /* images */; };
 		49EEB2D91F4D58D100F41908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2D81F4D58D100F41908 /* AppDelegate.swift */; };
 		49EEB2DB1F4D58D100F41908 /* ShaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */; };
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		4940AAC91F5139D1000C9091 /* ShaderGLKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderGLKitViewController.swift; sourceTree = "<group>"; };
 		4940AACB1F51408F000C9091 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		49602FA11F53DC3E00B08BE9 /* Shader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shader.swift; path = utils/Shader.swift; sourceTree = "<group>"; };
+		49602FA51F54052600B08BE9 /* ShaderToyRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShaderToyRenderer.swift; path = utils/ShaderToyRenderer.swift; sourceTree = "<group>"; };
 		49A7FA1E1F4FEDD7004F8C5A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		49A7FA1F1F4FEDEB004F8C5A /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = SOURCE_ROOT; };
 		49EEB2D51F4D58D100F41908 /* Experiments-iOS-OpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Experiments-iOS-OpenGL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +60,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49602FA01F53DC2300B08BE9 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				49602FA11F53DC3E00B08BE9 /* Shader.swift */,
+				49602FA51F54052600B08BE9 /* ShaderToyRenderer.swift */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		49602FA31F53DC9300B08BE9 /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				49EEB3011F4EC2C600F41908 /* ShaderSelectViewController.swift */,
+				49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */,
+				4940AAC91F5139D1000C9091 /* ShaderGLKitViewController.swift */,
+			);
+			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		49602FA41F53DCA600B08BE9 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				49EEB2F21F4D5B0000F41908 /* OpenGLView.swift */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 		49EEB2CC1F4D58D100F41908 = {
 			isa = PBXGroup;
 			children = (
@@ -78,15 +109,10 @@
 			children = (
 				49A7FA1F1F4FEDEB004F8C5A /* images */,
 				49EEB2FE1F4D90F300F41908 /* shaders */,
-				49EEB2D81F4D58D100F41908 /* AppDelegate.swift */,
-				49EEB3011F4EC2C600F41908 /* ShaderSelectViewController.swift */,
-				49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */,
-				4940AAC91F5139D1000C9091 /* ShaderGLKitViewController.swift */,
-				49EEB2F21F4D5B0000F41908 /* OpenGLView.swift */,
+				49602FA01F53DC2300B08BE9 /* utils */,
+				49602FA31F53DC9300B08BE9 /* viewControllers */,
+				49602FA41F53DCA600B08BE9 /* view */,
 				49EEB2DC1F4D58D100F41908 /* Main.storyboard */,
-				49EEB2E21F4D58D100F41908 /* Assets.xcassets */,
-				49EEB2E41F4D58D100F41908 /* LaunchScreen.storyboard */,
-				49A7FA1E1F4FEDD7004F8C5A /* README.md */,
 				49EEB3001F4D910100F41908 /* Supporting Files */,
 			);
 			path = "Experiments-iOS-OpenGL";
@@ -105,6 +131,10 @@
 		49EEB3001F4D910100F41908 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49EEB2D81F4D58D100F41908 /* AppDelegate.swift */,
+				49EEB2E41F4D58D100F41908 /* LaunchScreen.storyboard */,
+				49EEB2E21F4D58D100F41908 /* Assets.xcassets */,
+				49A7FA1E1F4FEDD7004F8C5A /* README.md */,
 				49EEB2E71F4D58D100F41908 /* Info.plist */,
 				49EEB2F91F4D72B900F41908 /* .gitignore */,
 			);
@@ -188,7 +218,9 @@
 			files = (
 				49EEB2DB1F4D58D100F41908 /* ShaderViewController.swift in Sources */,
 				4940AACA1F5139D1000C9091 /* ShaderGLKitViewController.swift in Sources */,
+				49602FA21F53DC3E00B08BE9 /* Shader.swift in Sources */,
 				49EEB2F31F4D5B0000F41908 /* OpenGLView.swift in Sources */,
+				49602FA61F54052600B08BE9 /* ShaderToyRenderer.swift in Sources */,
 				49EEB3021F4EC2C600F41908 /* ShaderSelectViewController.swift in Sources */,
 				49EEB2D91F4D58D100F41908 /* AppDelegate.swift in Sources */,
 			);
