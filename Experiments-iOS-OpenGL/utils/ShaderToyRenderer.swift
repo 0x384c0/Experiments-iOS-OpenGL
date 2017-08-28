@@ -13,6 +13,8 @@ protocol ShaderToyRenderer:class{
     var positionSlot:GLuint {get set}
     var iTimeSlot:GLint {get set}
     var iResolution:GLint {get set}
+    var iMouse:GLint {get set}
+    var iMousePoint:CGPoint {get set}
     var textureSlot:GLint {get set}
     var renderFrame:CGRect {get}
     var pixelScale:CGFloat { get }
@@ -42,6 +44,7 @@ extension ShaderToyRenderer{
         //Fragment attributes
         iTimeSlot = getUniformLocation(name: "iTime",program:program)
         iResolution = getUniformLocation(name: "iResolution",program:program)
+        iMouse = getUniformLocation(name: "iMouse",program:program)
         
         //initial setupVBO
         var vertexBuffer: GLuint = 0
@@ -63,6 +66,7 @@ extension ShaderToyRenderer{
         let mediaTime = Float((currentTime - startTime))
         if mediaTime > 10000 {startTime = currentTime}
         glUniform1f(iTimeSlot, mediaTime)
+        glUniform4f(iMouse, GLfloat(iMousePoint.x), GLfloat(iMousePoint.y), GLfloat(iMousePoint.x), GLfloat(iMousePoint.y))
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
     }
     

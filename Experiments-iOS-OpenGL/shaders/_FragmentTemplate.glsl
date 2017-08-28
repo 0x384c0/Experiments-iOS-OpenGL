@@ -1,6 +1,6 @@
 uniform float iTime;
 uniform vec3 iResolution;
-vec4 iMouse = vec4(1.0,1.0,1.0,1.0);
+uniform vec4 iMouse;
 uniform sampler2D iChannel0;
 
 vec4 textureLod(sampler2D sampler,vec2 par1, float par2){

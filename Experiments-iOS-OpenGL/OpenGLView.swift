@@ -97,8 +97,15 @@ class OpenGLView:UIView,ShaderToyRenderer{
     positionSlot: GLuint = 0,
     iTimeSlot: GLint = 0,
     iResolution: GLint = 0,
+    iMouse: GLint = 0,
+    iMousePoint = CGPoint(x: 1, y: 1),
     textureSlot: GLint = 0,
     startTime:CFTimeInterval = CACurrentMediaTime()
     var renderFrame: CGRect {return frame}
     var pixelScale:CGFloat{ return 1 }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        iMousePoint = touches.first!.location(in: self)
+    }
 }
