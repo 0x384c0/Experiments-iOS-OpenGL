@@ -13,8 +13,6 @@
 ![MengerSponge](images/MengerSponge.png)
 
 TODO:
-ocena
-https://www.shadertoy.com/view/MdXyzX
 furrball
 https://www.shadertoy.com/view/XsfGWN
 cloud ten
@@ -23,14 +21,8 @@ red palanet
 https://www.shadertoy.com/view/XsyGWV
 plasma globe 
 https://www.shadertoy.com/view/XsjXRm
-sun surface
-https://www.shadertoy.com/view/XlSSzK
-sphere
-https://www.shadertoy.com/view/llVXRd
 black hole
 https://www.shadertoy.com/view/lstSRS
-Rainbow Laser Beam
-https://www.shadertoy.com/view/XtBXW3
 Atmosphere system test
 https://www.shadertoy.com/view/XtBXDz
 sparks
