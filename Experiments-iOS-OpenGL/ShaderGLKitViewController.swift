@@ -10,7 +10,27 @@ import GLKit
 
 class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
 
+
     var glView:GLKView{return view as! GLKView}
+    var
+    playBtn:UIBarButtonItem!,
+    pauseleBtn:UIBarButtonItem!
+    func playPauseToggle(_ sender: UIBarButtonItem) {
+        var toggleBtn = playBtn
+        if isPlaying {
+            isPlaying = false
+        } else {
+            toggleBtn = pauseleBtn
+            isPlaying = true
+        }
+        navigationItem.rightBarButtonItem = toggleBtn
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        playBtn = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playPauseToggle(_:)))
+        pauseleBtn = UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(playPauseToggle(_:)))
+        navigationItem.rightBarButtonItem = pauseleBtn
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +68,8 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
     iMouse: GLint = 0,
     iMousePoint = CGPoint(x: 1, y: 1),
     textureSlot: GLint = 0,
-    startTime:CFTimeInterval = CACurrentMediaTime()
+    startTime:CFTimeInterval = CACurrentMediaTime(),
+    isPlaying = true
     var renderFrame: CGRect {return view.frame}
     
     

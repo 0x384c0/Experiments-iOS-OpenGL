@@ -12,14 +12,26 @@ class ShaderViewController: UIViewController {
     @IBOutlet weak var glView: OpenGLView!
     @IBOutlet weak var textField: UITextView!
     
-    private var
-    settings:ShaderSettings?
-    func setup(_ settings:ShaderSettings){
-        navigationItem.title = settings.shaderName
-        self.settings = settings
+    var
+    playBtn:UIBarButtonItem!,
+    pauseleBtn:UIBarButtonItem!
+    func playPauseToggle(_ sender: UIBarButtonItem) {
+        var toggleBtn = playBtn
+        if glView.isPlaying {
+            glView.isPlaying = false
+        } else {
+            toggleBtn = pauseleBtn
+            glView.isPlaying = true
+        }
+        navigationItem.rightBarButtonItem = toggleBtn
     }
     
-    private var animationLaunched = false
+    override func viewWillAppear(_ animated: Bool) {
+        playBtn = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playPauseToggle(_:)))
+        pauseleBtn = UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(playPauseToggle(_:)))
+        navigationItem.rightBarButtonItem = pauseleBtn
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         if animationLaunched {return}
         animationLaunched = true
@@ -29,6 +41,16 @@ class ShaderViewController: UIViewController {
         textField.text = try! String(contentsOfFile: shaderPath, encoding: .utf8)
         
         glView.config(shaderName:settings!.shaderName, textureName:settings!.textureName, isOpaque: settings!.isOpaque)
+    }
+    
+    
+    
+    private var
+    animationLaunched = false,
+    settings:ShaderSettings?
+    func setup(_ settings:ShaderSettings){
+        navigationItem.title = settings.shaderName
+        self.settings = settings
     }
     
     

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Shader View Controller-->
+        <!--Title-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ShaderViewController" customModule="Experiments_iOS_OpenGL" customModuleProvider="target" sceneMemberID="viewController">
@@ -47,6 +47,7 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="U97-C1-Uxb" secondAttribute="bottom" id="nRU-KI-Wc4"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="2u4-tq-ydS"/>
                     <connections>
                         <outlet property="glView" destination="4I1-XZ-5WW" id="Wzx-f1-TgO"/>
                         <outlet property="textField" destination="U97-C1-Uxb" id="hEZ-2e-VUx"/>
@@ -282,7 +283,7 @@
             </objects>
             <point key="canvasLocation" x="232.80000000000001" y="122.78860569715144"/>
         </scene>
-        <!--GLKit View Controller-->
+        <!--Title-->
         <scene sceneID="ulN-KY-FA3">
             <objects>
                 <glkViewController preferredFramesPerSecond="60" id="bXm-9g-9eZ" customClass="ShaderGLKitViewController" customModule="Experiments_iOS_OpenGL" customModuleProvider="target" sceneMemberID="viewController">
@@ -298,6 +299,7 @@
                             <outlet property="delegate" destination="bXm-9g-9eZ" id="1eZ-90-xvR"/>
                         </connections>
                     </glkView>
+                    <navigationItem key="navigationItem" title="Title" id="w3h-8B-Irn"/>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSp-nP-tRL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

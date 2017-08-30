@@ -17,7 +17,8 @@ class OpenGLView:UIView,ShaderToyRenderer{
     eaglLayer:CAEAGLLayer!,
     context:EAGLContext!,
     colorRenderBuffer:GLuint = 1,
-    glViewIsOpaque = true
+    glViewIsOpaque = true,
+    isPlaying = true
     
     
     override class var layerClass: AnyClass {

@@ -19,6 +19,7 @@ protocol ShaderToyRenderer:class{
     var renderFrame:CGRect {get}
     var pixelScale:CGFloat { get }
     var startTime:CFTimeInterval {get set}
+    var isPlaying:Bool {get set}
 }
 extension ShaderToyRenderer{
     func compileShaders(shaderName:String,program:GLuint) {
@@ -62,10 +63,12 @@ extension ShaderToyRenderer{
     }
     
     func render(){
-        let currentTime = CACurrentMediaTime()
-        let mediaTime = Float((currentTime - startTime))
-        if mediaTime > 10000 {startTime = currentTime}
-        glUniform1f(iTimeSlot, mediaTime)
+        if isPlaying{
+            let currentTime = CACurrentMediaTime()
+            let mediaTime = Float((currentTime - startTime))
+            if mediaTime > 10000 {startTime = currentTime}
+            glUniform1f(iTimeSlot, mediaTime)
+        }
         glUniform4f(iMouse, GLfloat(iMousePoint.x), GLfloat(iMousePoint.y), GLfloat(iMousePoint.x), GLfloat(iMousePoint.y))
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
     }
