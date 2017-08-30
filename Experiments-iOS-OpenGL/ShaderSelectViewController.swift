@@ -18,7 +18,7 @@ class ShaderSelectViewController: UITableViewController {
         var settings = ShaderSettings(shaderName: shaderName, textureName: nil, isOpaque: true)
         
         switch shaderName {
-        case "Clouds","TextureFragment","SunSurface":
+        case "Clouds","TextureFragment","SunSurface","CloudTen","PlasmaGlobe":
             settings.textureName = "RGBA_noize_med"
         case "SimpleFragment":
             settings.isOpaque = false
