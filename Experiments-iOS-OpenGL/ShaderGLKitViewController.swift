@@ -39,9 +39,11 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
         EAGLContext.setCurrent(glView.context)
         let program = glCreateProgram()
         compileShaders(shaderName: settings!.shaderName,program: program)
-        if let texture = UIImage(named: settings?.textureName ?? "")?.cgImage{
-            setupTextures(texture: texture, program: program)
-        }
+        setupTextures(
+            texture0: UIImage(named: settings?.texture1Name ?? "")?.cgImage,
+            texture1: UIImage(named: settings?.texture2Name ?? "")?.cgImage,
+            program: program
+        )
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
@@ -60,11 +62,14 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
     var
     positionSlot: GLuint = 0,
     colorSlot: GLuint = 0,
-    iTimeSlot: GLint = 0,
+    iTime: GLint = 0,
     iResolution: GLint = 0,
     iMouse: GLint = 0,
-    iMousePoint = CGPoint(x: 1, y: 1),
-    textureSlot: GLint = 0,
+    lastTouchCoordinates = CGPoint(x: 1, y: 1),
+    iChannel0: GLint = 0,
+    iChannel1: GLint = 0,
+    iChannelResolution0: GLint = 0,
+    iChannelResolution1: GLint = 0,
     startTime:CFTimeInterval = CACurrentMediaTime(),
     isPlaying = true
     var renderFrame: CGRect {return view.frame}
@@ -72,7 +77,7 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        iMousePoint = touches.first!.location(in: view)
+        lastTouchCoordinates = touches.first!.location(in: view)
     }
     
 }

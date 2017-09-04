@@ -11,15 +11,19 @@ import GLKit
 
 protocol ShaderToyRenderer:class{
     var positionSlot:GLuint {get set}
-    var iTimeSlot:GLint {get set}
-    var iResolution:GLint {get set}
-    var iMouse:GLint {get set}
-    var iMousePoint:CGPoint {get set}
-    var textureSlot:GLint {get set}
+    var lastTouchCoordinates:CGPoint {get set}
     var renderFrame:CGRect {get}
     var pixelScale:CGFloat { get }
     var startTime:CFTimeInterval {get set}
     var isPlaying:Bool {get set}
+    //Shader inputs
+    var iTime:GLint {get set}
+    var iResolution:GLint {get set}
+    var iMouse:GLint {get set}
+    var iChannel0:GLint {get set}
+    var iChannel1:GLint {get set}
+    var iChannelResolution0:GLint {get set}
+    var iChannelResolution1:GLint {get set}
 }
 extension ShaderToyRenderer{
     func compileShaders(shaderName:String,program:GLuint) {
@@ -43,7 +47,7 @@ extension ShaderToyRenderer{
         glEnableVertexAttribArray(self.positionSlot)
         
         //Fragment attributes
-        iTimeSlot = getUniformLocation(name: "iTime",program:program)
+        iTime = getUniformLocation(name: "iTime",program:program)
         iResolution = getUniformLocation(name: "iResolution",program:program)
         iMouse = getUniformLocation(name: "iMouse",program:program)
         
@@ -67,33 +71,51 @@ extension ShaderToyRenderer{
             let currentTime = CACurrentMediaTime()
             let mediaTime = Float((currentTime - startTime))
             if mediaTime > 10000 {startTime = currentTime}
-            glUniform1f(iTimeSlot, mediaTime)
+            glUniform1f(iTime, mediaTime)
         }
-        glUniform4f(iMouse, GLfloat(iMousePoint.x), GLfloat(iMousePoint.y), GLfloat(iMousePoint.x), GLfloat(iMousePoint.y))
+        glUniform4f(iMouse, GLfloat(lastTouchCoordinates.x), GLfloat(lastTouchCoordinates.y), GLfloat(lastTouchCoordinates.x), GLfloat(lastTouchCoordinates.y))
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei(Indices.count/MemoryLayout.size(ofValue: Indices[0])), GLenum(GL_UNSIGNED_BYTE), nil)
     }
     
     //textures
-    func setupTextures(texture:CGImage,program:GLuint){
-        textureSlot = GLint(glGetUniformLocation(program, "iChannel0"))
-        setupTexture(texture)
-    }
-    private func setupTexture(_ texture: CGImage){
-        do {
-            let _ = try GLKTextureLoader.texture(with: texture, options: nil)
-        } catch {
-            print((error as NSError).localizedDescription)
+    func setupTextures(texture0:CGImage?,texture1:CGImage?,program:GLuint){
+        if let texture0 = texture0 {
+            
+            do { let _ = try GLKTextureLoader.texture(with: texture0, options: nil) }
+            catch { print((error as NSError).localizedDescription) }//TODO: fix
+            
+            iChannelResolution0 = GLint(glGetUniformLocation(program, "iChannelResolution[0]"))
+            iChannel0           = GLint(glGetUniformLocation(program, "iChannel0"))
+            setupTexture(
+                texture0,
+                textureUnit: GLenum(GL_TEXTURE0),
+                location: iChannel0,
+                resLocation: iChannelResolution0,
+                x: 0
+            )
         }
+        if let texture1 = texture1 {
+            iChannelResolution1 = GLint(glGetUniformLocation(program, "iChannelResolution[1]"))
+            iChannel1           = GLint(glGetUniformLocation(program, "iChannel1"))
+            setupTexture(
+                texture1,
+                textureUnit: GLenum(GL_TEXTURE1),
+                location: iChannel1,
+                resLocation: iChannelResolution1,
+                x: 1
+            )
+        }
+    }
+    private func setupTexture(_ texture: CGImage,textureUnit:GLenum,location:GLint,resLocation:GLint,x: GLint){
+        glActiveTexture(textureUnit)
+        let textureInfo = try! GLKTextureLoader.texture(with: texture, options: nil)
+        glBindTexture(textureInfo.target,   textureInfo.name)
+        glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
+        glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_WRAP_S), GL_REPEAT)
+        glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_WRAP_T), GL_REPEAT)
         
-        let spriteTexture = try! GLKTextureLoader.texture(with: texture, options: nil)
-        
-        glActiveTexture(GLenum(GL_TEXTURE0));
-        glBindTexture(GLenum(GL_TEXTURE_2D), spriteTexture.name);
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_S), GL_REPEAT);
-        glTexParameteri(GLenum(GL_TEXTURE_2D), GLenum(GL_TEXTURE_WRAP_T), GL_REPEAT);
-        glUniform1i(textureSlot, 0);
-        
+        glUniform1i(location, x);
+        glUniform3f(resLocation, GLfloat(textureInfo.width), GLfloat(textureInfo.height), 0)
     }
     
     func getAttribLocation(name:String, program:GLuint) -> GLuint{
@@ -105,6 +127,10 @@ extension ShaderToyRenderer{
     
     var pixelScale:CGFloat{
         return UIScreen.main.scale
+    }
+    
+    func handleDeinit(){//TODO: handleDeinit
+        //        glDeleteTextures(GLsizei)
     }
 }
 

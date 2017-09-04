@@ -26,7 +26,7 @@ class OpenGLView:UIView,ShaderToyRenderer{
     }
     
     
-    func config(shaderName: String,textureName:String?,isOpaque:Bool = true) {
+    func config(shaderName: String,texture1Name:String?,texture2Name:String?,isOpaque:Bool = true) {
         self.glViewIsOpaque = isOpaque
         backgroundColor = UIColor.clear
         setupLayer()
@@ -35,9 +35,11 @@ class OpenGLView:UIView,ShaderToyRenderer{
         setupFrameBuffer()
         let program = glCreateProgram()
         compileShaders(shaderName: shaderName, program: program)
-        if let texture = UIImage(named: textureName ?? "")?.cgImage{
-            setupTextures(texture: texture, program: program)
-        }
+        setupTextures(
+            texture0: UIImage(named: texture1Name ?? "")?.cgImage,
+            texture1: UIImage(named: texture2Name ?? "")?.cgImage,
+            program: program
+        )
         render()
         setupDisplayLink()
     }
@@ -96,17 +98,20 @@ class OpenGLView:UIView,ShaderToyRenderer{
     //ShaderToyRenderer
     var
     positionSlot: GLuint = 0,
-    iTimeSlot: GLint = 0,
+    iTime: GLint = 0,
     iResolution: GLint = 0,
     iMouse: GLint = 0,
-    iMousePoint = CGPoint(x: 1, y: 1),
-    textureSlot: GLint = 0,
+    lastTouchCoordinates = CGPoint(x: 1, y: 1),
+    iChannel0: GLint = 0,
+    iChannel1: GLint = 0,
+    iChannelResolution0: GLint = 0,
+    iChannelResolution1: GLint = 0,
     startTime:CFTimeInterval = CACurrentMediaTime()
     var renderFrame: CGRect {return frame}
     var pixelScale:CGFloat{ return 1 }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        iMousePoint = touches.first!.location(in: self)
+        lastTouchCoordinates = touches.first!.location(in: self)
     }
 }

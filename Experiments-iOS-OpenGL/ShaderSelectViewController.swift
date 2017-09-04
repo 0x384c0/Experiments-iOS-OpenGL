@@ -15,11 +15,14 @@ class ShaderSelectViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let shaderName:String! = tableView.cellForRow(at: indexPath)?.textLabel?.text
         
-        var settings = ShaderSettings(shaderName: shaderName, textureName: nil, isOpaque: true)
+        var settings = ShaderSettings(shaderName: shaderName, texture1Name: nil, texture2Name: nil, isOpaque: true)
         
         switch shaderName {
+        case "RayMarchingExperimentN35":
+            settings.texture1Name = "ufizzi_gallery_blured"
+            settings.texture2Name = "Organic_2"
         case "Clouds","TextureFragment","SunSurface","CloudTen","PlasmaGlobe":
-            settings.textureName = "RGBA_noize_med"
+            settings.texture1Name = "RGBA_noize_med"
         case "SimpleFragment":
             settings.isOpaque = false
         default: break
@@ -53,7 +56,8 @@ class ShaderSelectViewController: UITableViewController {
 struct ShaderSettings {
     var
     shaderName:String,
-    textureName:String?,
+    texture1Name:String?,
+    texture2Name:String?,
     isOpaque:Bool
 }
 

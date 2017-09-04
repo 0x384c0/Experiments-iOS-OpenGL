@@ -40,7 +40,12 @@ class ShaderViewController: UIViewController {
         let shaderPath = Bundle.main.path(forResource: shaderFolder + settings!.shaderName, ofType: "glsl")!
         textField.text = try! String(contentsOfFile: shaderPath, encoding: .utf8)
         
-        glView.config(shaderName:settings!.shaderName, textureName:settings!.textureName, isOpaque: settings!.isOpaque)
+        glView.config(
+            shaderName:settings!.shaderName,
+            texture1Name:settings!.texture1Name,
+            texture2Name: settings!.texture2Name,
+            isOpaque: settings!.isOpaque
+        )
     }
     
     
