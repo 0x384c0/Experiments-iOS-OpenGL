@@ -42,7 +42,8 @@ class ShaderViewController: UIViewController {
         
         glView.config(
             shaderName:settings!.shaderName,
-            texture1Name:settings!.texture1Name,
+            texture0Name: settings!.texture0Name,
+            texture1Name: settings!.texture1Name,
             texture2Name: settings!.texture2Name,
             isOpaque: settings!.isOpaque
         )

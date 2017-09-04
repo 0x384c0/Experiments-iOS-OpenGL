@@ -26,7 +26,7 @@ class OpenGLView:UIView,ShaderToyRenderer{
     }
     
     
-    func config(shaderName: String,texture1Name:String?,texture2Name:String?,isOpaque:Bool = true) {
+    func config(shaderName: String,texture0Name:String?,texture1Name:String?,texture2Name:String?,isOpaque:Bool = true) {
         self.glViewIsOpaque = isOpaque
         backgroundColor = UIColor.clear
         setupLayer()
@@ -36,8 +36,9 @@ class OpenGLView:UIView,ShaderToyRenderer{
         let program = glCreateProgram()
         compileShaders(shaderName: shaderName, program: program)
         setupTextures(
-            texture0: UIImage(named: texture1Name ?? "")?.cgImage,
-            texture1: UIImage(named: texture2Name ?? "")?.cgImage,
+            texture0: UIImage(named: texture0Name ?? "")?.cgImage,
+            texture1: UIImage(named: texture1Name ?? "")?.cgImage,
+            texture2: UIImage(named: texture2Name ?? "")?.cgImage,
             program: program
         )
         render()
@@ -104,8 +105,10 @@ class OpenGLView:UIView,ShaderToyRenderer{
     lastTouchCoordinates = CGPoint(x: 1, y: 1),
     iChannel0: GLint = 0,
     iChannel1: GLint = 0,
+    iChannel2: GLint = 0,
     iChannelResolution0: GLint = 0,
     iChannelResolution1: GLint = 0,
+    iChannelResolution2: GLint = 0,
     startTime:CFTimeInterval = CACurrentMediaTime()
     var renderFrame: CGRect {return frame}
     var pixelScale:CGFloat{ return 1 }

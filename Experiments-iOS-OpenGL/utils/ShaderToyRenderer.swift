@@ -22,8 +22,10 @@ protocol ShaderToyRenderer:class{
     var iMouse:GLint {get set}
     var iChannel0:GLint {get set}
     var iChannel1:GLint {get set}
+    var iChannel2:GLint {get set}
     var iChannelResolution0:GLint {get set}
     var iChannelResolution1:GLint {get set}
+    var iChannelResolution2:GLint {get set}
 }
 extension ShaderToyRenderer{
     func compileShaders(shaderName:String,program:GLuint) {
@@ -78,31 +80,42 @@ extension ShaderToyRenderer{
     }
     
     //textures
-    func setupTextures(texture0:CGImage?,texture1:CGImage?,program:GLuint){
-        if let texture0 = texture0 {
+    func setupTextures(texture0:CGImage?,texture1:CGImage?,texture2:CGImage?,program:GLuint){
+        if let texture = texture0 {
             
-            do { let _ = try GLKTextureLoader.texture(with: texture0, options: nil) }
+            do { let _ = try GLKTextureLoader.texture(with: texture, options: nil) }
             catch { print((error as NSError).localizedDescription) }//TODO: fix
             
             iChannelResolution0 = GLint(glGetUniformLocation(program, "iChannelResolution[0]"))
             iChannel0           = GLint(glGetUniformLocation(program, "iChannel0"))
             setupTexture(
-                texture0,
+                texture,
                 textureUnit: GLenum(GL_TEXTURE0),
                 location: iChannel0,
                 resLocation: iChannelResolution0,
                 x: 0
             )
         }
-        if let texture1 = texture1 {
+        if let texture = texture1 {
             iChannelResolution1 = GLint(glGetUniformLocation(program, "iChannelResolution[1]"))
             iChannel1           = GLint(glGetUniformLocation(program, "iChannel1"))
             setupTexture(
-                texture1,
+                texture,
                 textureUnit: GLenum(GL_TEXTURE1),
                 location: iChannel1,
                 resLocation: iChannelResolution1,
                 x: 1
+            )
+        }
+        if let texture = texture2 {
+            iChannelResolution2 = GLint(glGetUniformLocation(program, "iChannelResolution[2]"))
+            iChannel2           = GLint(glGetUniformLocation(program, "iChannel2"))
+            setupTexture(
+                texture,
+                textureUnit: GLenum(GL_TEXTURE2),
+                location: iChannel2,
+                resLocation: iChannelResolution2,
+                x: 2
             )
         }
     }

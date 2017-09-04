@@ -42,6 +42,7 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
         setupTextures(
             texture0: UIImage(named: settings?.texture1Name ?? "")?.cgImage,
             texture1: UIImage(named: settings?.texture2Name ?? "")?.cgImage,
+            texture2: UIImage(named: settings?.texture2Name ?? "")?.cgImage,
             program: program
         )
     }
@@ -68,8 +69,10 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
     lastTouchCoordinates = CGPoint(x: 1, y: 1),
     iChannel0: GLint = 0,
     iChannel1: GLint = 0,
+    iChannel2: GLint = 0,
     iChannelResolution0: GLint = 0,
     iChannelResolution1: GLint = 0,
+    iChannelResolution2: GLint = 0,
     startTime:CFTimeInterval = CACurrentMediaTime(),
     isPlaying = true
     var renderFrame: CGRect {return view.frame}

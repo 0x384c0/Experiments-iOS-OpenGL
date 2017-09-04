@@ -8,21 +8,28 @@
 import UIKit
 
 class ShaderSelectViewController: UITableViewController {
-    var isFullScreen = true
+    var isFullScreen = false
     @IBAction func fullScreenSwitch(_ sender: UISwitch) {
         isFullScreen = sender.isOn
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let shaderName:String! = tableView.cellForRow(at: indexPath)?.textLabel?.text
         
-        var settings = ShaderSettings(shaderName: shaderName, texture1Name: nil, texture2Name: nil, isOpaque: true)
+        var settings = ShaderSettings(shaderName: shaderName, texture0Name: nil, texture1Name: nil, texture2Name: nil, isOpaque: true)
         
         switch shaderName {
+        case "furball":
+            settings.texture0Name = "RGBA_noize_small"
+            settings.texture1Name = "RGBA_noize_small"
+        case "VoxelEdges":
+            settings.texture0Name = "RGBA_noize_medium"
+            settings.texture1Name = "abstract_1"
+            settings.texture2Name = "lichen"
         case "RayMarchingExperimentN35":
-            settings.texture1Name = "ufizzi_gallery_blured"
-            settings.texture2Name = "Organic_2"
+            settings.texture0Name = "ufizzi_gallery_blured"
+            settings.texture1Name = "Organic_2"
         case "Clouds","TextureFragment","SunSurface","CloudTen","PlasmaGlobe":
-            settings.texture1Name = "RGBA_noize_med"
+            settings.texture0Name = "RGBA_noize_medium"
         case "SimpleFragment":
             settings.isOpaque = false
         default: break
@@ -56,6 +63,7 @@ class ShaderSelectViewController: UITableViewController {
 struct ShaderSettings {
     var
     shaderName:String,
+    texture0Name:String?,
     texture1Name:String?,
     texture2Name:String?,
     isOpaque:Bool
