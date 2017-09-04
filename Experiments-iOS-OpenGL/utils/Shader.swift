@@ -33,6 +33,7 @@ class Shader{
                 .replacingOccurrences(of: "float ",         with: "highp float ")
                 .replacingOccurrences(of: "ihighp ",        with: "highp i")
                 .replacingOccurrences(of: "highp highp ",   with: "highp ")
+            print(shaderString)
         } else {
             shaderString = shaderStringBody
         }

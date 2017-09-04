@@ -27,6 +27,7 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         playBtn = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playPauseToggle(_:)))
         pauseleBtn = UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(playPauseToggle(_:)))
         navigationItem.rightBarButtonItem = pauseleBtn
@@ -41,10 +42,6 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
         if let texture = UIImage(named: settings?.textureName ?? "")?.cgImage{
             setupTextures(texture: texture, program: program)
         }
-    }
-    
-    func setupGesture(){
-        
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
