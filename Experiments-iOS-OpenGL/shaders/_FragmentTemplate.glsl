@@ -1,3 +1,6 @@
+precision highp float;
+precision highp int;
+
 uniform float iTime;
 uniform vec3 iResolution;
 uniform vec4 iMouse;

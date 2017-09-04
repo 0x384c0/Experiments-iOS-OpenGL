@@ -22,18 +22,7 @@ class Shader{
         
         let shaderString:String
         if type == GLenum(GL_FRAGMENT_SHADER){
-            let shaderStringTmp = shaderTemplateString.replacingOccurrences(of:"SHADER_TOY_CODE_PLACEHOLDER",with: shaderStringBody)
-            shaderString = shaderStringTmp
-                .replacingOccurrences(of: "vec2 ",          with: "highp vec2 ")
-                .replacingOccurrences(of: "vec3 ",          with: "highp vec3 ")
-                .replacingOccurrences(of: "vec4 ",          with: "highp vec4 ")
-                .replacingOccurrences(of: "mat2 ",          with: "highp mat2 ")
-                .replacingOccurrences(of: "mat3 ",          with: "highp mat3 ")
-                .replacingOccurrences(of: "mat4 ",          with: "highp mat4 ")
-                .replacingOccurrences(of: "float ",         with: "highp float ")
-                .replacingOccurrences(of: "ihighp ",        with: "highp i")
-                .replacingOccurrences(of: "highp highp ",   with: "highp ")
-            print(shaderString)
+            shaderString = shaderTemplateString.replacingOccurrences(of:"SHADER_TOY_CODE_PLACEHOLDER",with: shaderStringBody)
         } else {
             shaderString = shaderStringBody
         }
