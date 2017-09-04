@@ -18,17 +18,21 @@ class ShaderSelectViewController: UITableViewController {
         var settings = ShaderSettings(shaderName: shaderName, texture0Name: nil, texture1Name: nil, texture2Name: nil, isOpaque: true)
         
         switch shaderName {
+        case "Spout":
+            settings.texture0Name = "abstract_1"
+        case "FractalLand":
+            settings.texture0Name = "Nyancat"
         case "furball":
             settings.texture0Name = "RGBA_noize_small"
             settings.texture1Name = "RGBA_noize_small"
-        case "VoxelEdges":
+        case "VoxelEdges","MineCraft","Mountains","IcePrimitives_simplerVersion":
             settings.texture0Name = "RGBA_noize_medium"
             settings.texture1Name = "abstract_1"
             settings.texture2Name = "lichen"
-        case "RayMarchingExperimentN35":
+        case "RayMarchingExperimentN35","PerspexWebLattice":
             settings.texture0Name = "ufizzi_gallery_blured"
             settings.texture1Name = "Organic_2"
-        case "Clouds","TextureFragment","SunSurface","CloudTen","PlasmaGlobe":
+        case "Clouds","TextureFragment","SunSurface","CloudTen","PlasmaGlobe","Buoy","RemnantX":
             settings.texture0Name = "RGBA_noize_medium"
         case "SimpleFragment":
             settings.isOpaque = false
