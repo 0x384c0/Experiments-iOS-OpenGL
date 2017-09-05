@@ -18,12 +18,16 @@ class ShaderSelectViewController: UITableViewController {
         var settings = ShaderSettings(shaderName: shaderName, texture0Name: nil, texture1Name: nil, texture2Name: nil, texture3Name: nil, isOpaque: true)
         
         switch shaderName {
-        case "Canyon":
+        case "TerrainTubes","Normal Map Blending","Rain drops on screen":
+            settings.texture0Name = "stars"
+            settings.texture1Name = "RGBA_noize_medium"
+            settings.texture3Name = "abstract_2"
+        case "Canyon","A lonely diamond","ball in hall":
             settings.texture0Name = "Organic_2"
             settings.texture1Name = "abstract_1"
             settings.texture2Name = "RGBA_noize_medium"
             settings.texture3Name = "lichen"
-        case "Spout":
+        case "Spout","Rainier mood","Broken Cam Distortion":
             settings.texture0Name = "abstract_1"
         case "FractalLand":
             settings.texture0Name = "Nyancat"
@@ -37,7 +41,16 @@ class ShaderSelectViewController: UITableViewController {
         case "RayMarchingExperimentN35","PerspexWebLattice":
             settings.texture0Name = "ufizzi_gallery_blured"
             settings.texture1Name = "Organic_2"
-        case "Clouds","TextureFragment","SunSurface","CloudTen","PlasmaGlobe","Buoy","RemnantX":
+        case "Clouds",
+             "TextureFragment",
+             "SunSurface",
+             "CloudTen",
+             "PlasmaGlobe",
+             "Buoy",
+             "RemnantX",
+             "Magnetismic",
+             "Digital Brain",
+             "Fire2":
             settings.texture0Name = "RGBA_noize_medium"
         case "SimpleFragment":
             settings.isOpaque = false

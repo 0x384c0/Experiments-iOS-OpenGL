@@ -24,48 +24,27 @@ TODO:
 
 https://www.shadertoy.com/results?query=&sort=hot&from=1068&num=12
 
-https://www.shadertoy.com/view/MdcXzn
-https://www.shadertoy.com/view/4dd3Rl
 https://www.shadertoy.com/view/4sSBzy
-https://www.shadertoy.com/view/4l3SzH
 https://www.shadertoy.com/view/lslfRN
 https://www.shadertoy.com/view/lslSRf
-https://www.shadertoy.com/view/ltfGDs
-https://www.shadertoy.com/view/Xsf3zX
 https://www.shadertoy.com/view/MdscW2
 https://www.shadertoy.com/view/XtX3R2
-https://www.shadertoy.com/view/MlKSWm
 https://www.shadertoy.com/view/XsSGDy
-https://www.shadertoy.com/view/XlB3zV
 https://www.shadertoy.com/view/MlBSDW
-https://www.shadertoy.com/view/4sl3Dr
-https://www.shadertoy.com/view/4ssGzn
-https://www.shadertoy.com/view/ldfyzl
-https://www.shadertoy.com/view/XdfGz8
-https://www.shadertoy.com/view/4dBBRy
-https://www.shadertoy.com/view/4t2SzR
-https://www.shadertoy.com/view/ldSfDW
-https://www.shadertoy.com/view/4df3Rn
-https://www.shadertoy.com/view/MdXGDH
-https://www.shadertoy.com/view/ltfXDM
-https://www.shadertoy.com/view/4lfyRn
-https://www.shadertoy.com/view/4ttGWM
-https://www.shadertoy.com/view/Xd33Ds
+
 
 program upgrade required
 
-channel3
-https://www.shadertoy.com/view/4sjXzG
-
-
 bufA
 bufB
-red palanet 
-https://www.shadertoy.com/view/XsyGWV
 black hole
 https://www.shadertoy.com/view/lstSRS
+red palanet 
+https://www.shadertoy.com/view/XsyGWV
 https://www.shadertoy.com/view/MsGSRd
 https://www.shadertoy.com/view/XdSBDw
 https://www.shadertoy.com/view/XlcSDr
 https://www.shadertoy.com/view/Xsd3DB
+https://www.shadertoy.com/view/MdX3Rr
+https://www.shadertoy.com/view/Xd33Ds
 

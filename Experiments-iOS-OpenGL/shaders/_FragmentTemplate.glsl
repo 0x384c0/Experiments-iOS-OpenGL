@@ -22,6 +22,15 @@ vec4 texture(sampler2D sampler,vec2 par1){
 vec4 texture(sampler2D sampler,vec2 par1, float par2){
     return texture2D(sampler,par1,par2);
 }
+float fwidth(float par1){
+    return par1;
+}
+mat3 transpose(mat3 par1){
+    return par1;
+}
+vec2 round(vec2 par1){
+    return par1;
+}
 
 SHADER_TOY_CODE_PLACEHOLDER
 
