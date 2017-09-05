@@ -45,6 +45,7 @@ class ShaderViewController: UIViewController {
             texture0Name: settings!.texture0Name,
             texture1Name: settings!.texture1Name,
             texture2Name: settings!.texture2Name,
+            texture3Name: settings!.texture3Name,
             isOpaque: settings!.isOpaque
         )
     }

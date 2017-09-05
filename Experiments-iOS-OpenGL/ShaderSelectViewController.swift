@@ -15,9 +15,14 @@ class ShaderSelectViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let shaderName:String! = tableView.cellForRow(at: indexPath)?.textLabel?.text
         
-        var settings = ShaderSettings(shaderName: shaderName, texture0Name: nil, texture1Name: nil, texture2Name: nil, isOpaque: true)
+        var settings = ShaderSettings(shaderName: shaderName, texture0Name: nil, texture1Name: nil, texture2Name: nil, texture3Name: nil, isOpaque: true)
         
         switch shaderName {
+        case "Canyon":
+            settings.texture0Name = "Organic_2"
+            settings.texture1Name = "abstract_1"
+            settings.texture2Name = "RGBA_noize_medium"
+            settings.texture3Name = "lichen"
         case "Spout":
             settings.texture0Name = "abstract_1"
         case "FractalLand":
@@ -70,6 +75,7 @@ struct ShaderSettings {
     texture0Name:String?,
     texture1Name:String?,
     texture2Name:String?,
+    texture3Name:String?,
     isOpaque:Bool
 }
 

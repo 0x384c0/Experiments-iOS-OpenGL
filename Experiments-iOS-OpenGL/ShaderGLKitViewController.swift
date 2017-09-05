@@ -43,6 +43,7 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
             texture0: UIImage(named: settings?.texture1Name ?? "")?.cgImage,
             texture1: UIImage(named: settings?.texture2Name ?? "")?.cgImage,
             texture2: UIImage(named: settings?.texture2Name ?? "")?.cgImage,
+            texture3: UIImage(named: settings?.texture3Name ?? "")?.cgImage,
             program: program
         )
     }
@@ -70,9 +71,11 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
     iChannel0: GLint = 0,
     iChannel1: GLint = 0,
     iChannel2: GLint = 0,
+    iChannel3: GLint = 0,
     iChannelResolution0: GLint = 0,
     iChannelResolution1: GLint = 0,
     iChannelResolution2: GLint = 0,
+    iChannelResolution3: GLint = 0,
     startTime:CFTimeInterval = CACurrentMediaTime(),
     isPlaying = true
     var renderFrame: CGRect {return view.frame}

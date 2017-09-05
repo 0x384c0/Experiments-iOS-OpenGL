@@ -37,16 +37,24 @@ https://www.shadertoy.com/view/XtX3R2
 https://www.shadertoy.com/view/MlKSWm
 https://www.shadertoy.com/view/XsSGDy
 https://www.shadertoy.com/view/XlB3zV
+https://www.shadertoy.com/view/MlBSDW
 https://www.shadertoy.com/view/4sl3Dr
 https://www.shadertoy.com/view/4ssGzn
+https://www.shadertoy.com/view/ldfyzl
+https://www.shadertoy.com/view/XdfGz8
+https://www.shadertoy.com/view/4dBBRy
 https://www.shadertoy.com/view/4t2SzR
 https://www.shadertoy.com/view/ldSfDW
 https://www.shadertoy.com/view/4df3Rn
+https://www.shadertoy.com/view/MdXGDH
+https://www.shadertoy.com/view/ltfXDM
+https://www.shadertoy.com/view/4lfyRn
+https://www.shadertoy.com/view/4ttGWM
+https://www.shadertoy.com/view/Xd33Ds
 
 program upgrade required
 
 channel3
-https://www.shadertoy.com/view/MdBGzG
 https://www.shadertoy.com/view/4sjXzG
 
 
@@ -58,4 +66,6 @@ black hole
 https://www.shadertoy.com/view/lstSRS
 https://www.shadertoy.com/view/MsGSRd
 https://www.shadertoy.com/view/XdSBDw
+https://www.shadertoy.com/view/XlcSDr
+https://www.shadertoy.com/view/Xsd3DB
 

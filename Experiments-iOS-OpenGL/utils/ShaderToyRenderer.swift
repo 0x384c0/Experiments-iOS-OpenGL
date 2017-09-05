@@ -23,9 +23,11 @@ protocol ShaderToyRenderer:class{
     var iChannel0:GLint {get set}
     var iChannel1:GLint {get set}
     var iChannel2:GLint {get set}
+    var iChannel3:GLint {get set}
     var iChannelResolution0:GLint {get set}
     var iChannelResolution1:GLint {get set}
     var iChannelResolution2:GLint {get set}
+    var iChannelResolution3:GLint {get set}
 }
 extension ShaderToyRenderer{
     func compileShaders(shaderName:String,program:GLuint) {
@@ -80,7 +82,7 @@ extension ShaderToyRenderer{
     }
     
     //textures
-    func setupTextures(texture0:CGImage?,texture1:CGImage?,texture2:CGImage?,program:GLuint){
+    func setupTextures(texture0:CGImage?,texture1:CGImage?,texture2:CGImage?,texture3:CGImage?,program:GLuint){
         if let texture = texture0 {
             
             do { let _ = try GLKTextureLoader.texture(with: texture, options: nil) }
@@ -116,6 +118,17 @@ extension ShaderToyRenderer{
                 location: iChannel2,
                 resLocation: iChannelResolution2,
                 x: 2
+            )
+        }
+        if let texture = texture3 {
+            iChannelResolution3 = GLint(glGetUniformLocation(program, "iChannelResolution[3]"))
+            iChannel3           = GLint(glGetUniformLocation(program, "iChannel3"))
+            setupTexture(
+                texture,
+                textureUnit: GLenum(GL_TEXTURE3),
+                location: iChannel3,
+                resLocation: iChannelResolution3,
+                x: 3
             )
         }
     }

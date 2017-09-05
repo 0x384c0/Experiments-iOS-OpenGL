@@ -7,6 +7,7 @@ uniform vec4        iMouse;                 // mouse pixel coords. xy: current (
 uniform sampler2D   iChannel0;              // input channel. XX = 2D/Cube
 uniform sampler2D   iChannel1;              // input channel. XX = 2D/Cube
 uniform sampler2D   iChannel2;              // input channel. XX = 2D/Cube
+uniform sampler2D   iChannel3;              // input channel. XX = 2D/Cube
 uniform vec3        iChannelResolution[4];  // channel resolution (in pixels)
 
 vec4 textureLod(sampler2D sampler,vec2 par1, float par2){
