@@ -27,10 +27,8 @@ https://www.shadertoy.com/results?query=&sort=hot&from=1068&num=12
 https://www.shadertoy.com/view/4sSBzy
 https://www.shadertoy.com/view/lslfRN
 https://www.shadertoy.com/view/lslSRf
-https://www.shadertoy.com/view/MdscW2
 https://www.shadertoy.com/view/XtX3R2
 https://www.shadertoy.com/view/XsSGDy
-https://www.shadertoy.com/view/MlBSDW
 
 
 program upgrade required

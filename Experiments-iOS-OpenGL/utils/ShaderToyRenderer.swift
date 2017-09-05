@@ -134,14 +134,20 @@ extension ShaderToyRenderer{
     }
     private func setupTexture(_ texture: CGImage,textureUnit:GLenum,location:GLint,resLocation:GLint,x: GLint){
         glActiveTexture(textureUnit)
-        let textureInfo = try! GLKTextureLoader.texture(with: texture, options: nil)
-        glBindTexture(textureInfo.target,   textureInfo.name)
-        glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
-        glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_WRAP_S), GL_REPEAT)
-        glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_WRAP_T), GL_REPEAT)
+        do {
+            let textureInfo = try GLKTextureLoader.texture(with: texture, options: nil)
+            glBindTexture(textureInfo.target,   textureInfo.name)
+            glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
+            glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_WRAP_S), GL_REPEAT)
+            glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_WRAP_T), GL_REPEAT)
+            
+            glUniform1i(location, x);
+            glUniform3f(resLocation, GLfloat(textureInfo.width), GLfloat(textureInfo.height), 0)
+        }
+        catch {
+            preconditionFailure((error as NSError).localizedDescription)
+        }
         
-        glUniform1i(location, x);
-        glUniform3f(resLocation, GLfloat(textureInfo.width), GLfloat(textureInfo.height), 0)
     }
     
     func getAttribLocation(name:String, program:GLuint) -> GLuint{

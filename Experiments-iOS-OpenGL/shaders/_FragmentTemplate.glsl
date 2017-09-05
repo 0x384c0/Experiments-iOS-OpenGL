@@ -1,3 +1,5 @@
+#extension GL_OES_standard_derivatives : enable
+#extension GL_EXT_shader_texture_lod : enable
 precision highp float;
 precision highp int;
 
@@ -21,9 +23,6 @@ vec4 texture(sampler2D sampler,vec2 par1){
 }
 vec4 texture(sampler2D sampler,vec2 par1, float par2){
     return texture2D(sampler,par1,par2);
-}
-float fwidth(float par1){
-    return par1;
 }
 mat3 transpose(mat3 par1){
     return par1;

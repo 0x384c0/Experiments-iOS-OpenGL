@@ -18,6 +18,11 @@ class ShaderSelectViewController: UITableViewController {
         var settings = ShaderSettings(shaderName: shaderName, texture0Name: nil, texture1Name: nil, texture2Name: nil, texture3Name: nil, isOpaque: true)
         
         switch shaderName {
+        case "Entangled Vines":
+            settings.texture0Name = "organic_1"
+        case "Rain":
+            settings.texture0Name = "london"
+            settings.texture1Name = "pebbles"
         case "TerrainTubes","Normal Map Blending","Rain drops on screen":
             settings.texture0Name = "stars"
             settings.texture1Name = "RGBA_noize_medium"
