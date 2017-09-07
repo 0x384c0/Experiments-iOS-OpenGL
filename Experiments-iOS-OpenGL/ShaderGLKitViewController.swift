@@ -35,7 +35,7 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        glView.context = EAGLContext(api: .openGLES2)
+        glView.context = EAGLContext(api: .openGLES3)
         EAGLContext.setCurrent(glView.context)
         let program = glCreateProgram()
         compileShaders(shaderName: settings!.shaderName,program: program)

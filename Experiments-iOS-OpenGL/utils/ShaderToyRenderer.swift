@@ -43,7 +43,7 @@ extension ShaderToyRenderer{
         var status: GLint = 0
         glLinkProgram(program)
         glGetProgramiv(program, GLenum(GL_LINK_STATUS), &status)
-        if status == 0 { preconditionFailure("Failed to link program: \(program)") }
+        if status == GL_FALSE { printGlErrors(program: program) }
         glUseProgram(program)
         
         //Vertex attributes
@@ -84,9 +84,6 @@ extension ShaderToyRenderer{
     //textures
     func setupTextures(texture0:CGImage?,texture1:CGImage?,texture2:CGImage?,texture3:CGImage?,program:GLuint){
         if let texture = texture0 {
-            
-            do { let _ = try GLKTextureLoader.texture(with: texture, options: nil) }
-            catch { print((error as NSError).localizedDescription) }//TODO: fix
             
             iChannelResolution0 = GLint(glGetUniformLocation(program, "iChannelResolution[0]"))
             iChannel0           = GLint(glGetUniformLocation(program, "iChannel0"))
@@ -135,16 +132,24 @@ extension ShaderToyRenderer{
     private func setupTexture(_ texture: CGImage,textureUnit:GLenum,location:GLint,resLocation:GLint,x: GLint){
         glActiveTexture(textureUnit)
         do {
+//            print(texture.alphaInfo)
+//            print(texture.bitmapInfo)
+//            print(texture.width)
+//            print(texture.height)
+            glGetError()
             let textureInfo = try GLKTextureLoader.texture(with: texture, options: nil)
             glBindTexture(textureInfo.target,   textureInfo.name)
-            glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR)
             glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_WRAP_S), GL_REPEAT)
             glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_WRAP_T), GL_REPEAT)
+            glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR)
+            glTexParameteri(textureInfo.target, GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR_MIPMAP_LINEAR)
+            glGenerateMipmap(textureInfo.target)
             
             glUniform1i(location, x);
             glUniform3f(resLocation, GLfloat(textureInfo.width), GLfloat(textureInfo.height), 0)
         }
         catch {
+            print(GLKTextureLoaderError(_nsError: (error as NSError)))
             preconditionFailure((error as NSError).localizedDescription)
         }
         
@@ -163,6 +168,20 @@ extension ShaderToyRenderer{
     
     func handleDeinit(){//TODO: handleDeinit
         //        glDeleteTextures(GLsizei)
+    }
+    
+    func printGlErrors(program:GLuint){
+        var messages = "GL ERRORS:\n"
+        var logLength: GLint = 0
+        glGetProgramiv(program, GLenum(GL_INFO_LOG_LENGTH), &logLength)
+        if logLength > 0 {
+            var log: [GLchar] = [GLchar](repeating: 0, count: Int(logLength))
+            glGetProgramInfoLog(program, logLength, &logLength, &log)
+            
+            messages += "\(String(cString: log))\n"
+        }
+        glDeleteProgram(program)
+        preconditionFailure(messages)
     }
 }
 

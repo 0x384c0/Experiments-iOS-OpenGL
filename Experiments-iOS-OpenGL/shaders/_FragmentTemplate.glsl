@@ -1,7 +1,8 @@
-#extension GL_OES_standard_derivatives : enable
-#extension GL_EXT_shader_texture_lod : enable
+#version 300 es
 precision highp float;
 precision highp int;
+
+out vec4 fragmentColor;
 
 uniform vec3        iResolution;            // viewport resolution (in pixels)
 uniform float       iTime;                  // shader playback time (in seconds)
@@ -12,27 +13,27 @@ uniform sampler2D   iChannel2;              // input channel. XX = 2D/Cube
 uniform sampler2D   iChannel3;              // input channel. XX = 2D/Cube
 uniform vec3        iChannelResolution[4];  // channel resolution (in pixels)
 
-vec4 textureLod(sampler2D sampler,vec2 par1, float par2){
-    return texture2D(sampler,par1,par2);
-}
-vec4 texture(sampler2D sampler,vec3 par1){
-    return texture2D(sampler,par1.xy,0.);
-}
-vec4 texture(sampler2D sampler,vec2 par1){
-    return texture2D(sampler,par1,0.);
-}
-vec4 texture(sampler2D sampler,vec2 par1, float par2){
-    return texture2D(sampler,par1,par2);
-}
-mat3 transpose(mat3 par1){
-    return par1;
-}
-vec2 round(vec2 par1){
-    return par1;
-}
+//vec4 textureLod(sampler2D sampler,vec2 par1, float par2){
+//    return texture2D(sampler,par1,par2);
+//}
+//vec4 texture(sampler2D sampler,vec3 par1){
+//    return texture2D(sampler,par1.xy,0.);
+//}
+//vec4 texture(sampler2D sampler,vec2 par1){
+//    return texture2D(sampler,par1,0.);
+//}
+//vec4 texture(sampler2D sampler,vec2 par1, float par2){
+//    return texture2D(sampler,par1,par2);
+//}
+//mat3 transpose(mat3 par1){
+//    return par1;
+//}
+//vec2 round(vec2 par1){
+//    return par1;
+//}
 
 SHADER_TOY_CODE_PLACEHOLDER
 
-void main(void) {
-    mainImage(gl_FragColor,gl_FragCoord.xy);
+void main() {
+    mainImage(fragmentColor,gl_FragCoord.xy);
 }

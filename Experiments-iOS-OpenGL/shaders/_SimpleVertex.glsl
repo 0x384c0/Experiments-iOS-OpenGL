@@ -1,6 +1,7 @@
-attribute vec4 Position;
+#version 300 es
 
+in vec4 Position;
 
-void main(void) {
+void main() {
     gl_Position = Position;
 }
