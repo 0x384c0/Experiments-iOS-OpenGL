@@ -126,7 +126,7 @@ float raycast (in vec3 origin, in vec3 direction, in vec4 normal, in float color
     }
     
     // Get the background color
-    float backColor = dot (texture (iChannel0, direction).rgb, channel);
+    float backColor = dot (textureForCube(iChannel0, direction).rgb, channel);
     
     // Return the intensity of this color channel
     return color + backColor * intensity;
@@ -164,7 +164,7 @@ void mainImage (out vec4 fragColor, in vec2 fragCoord) {
     
     // Check whether we hit something
     if (dist >= 0.0) {
-        fragColor.rgb = texture (iChannel0, direction).rgb;
+        fragColor.rgb = textureForCube(iChannel0, direction).rgb;
     } else {
         
         // Get the normal

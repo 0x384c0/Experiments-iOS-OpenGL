@@ -144,10 +144,10 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         b=li;
         
         ray = reflect(rd, n);
-        cubeRay = texture(iChannel0, ray).rgb  * refl_i ;
+        cubeRay = textureForCube(iChannel0, ray).rgb  * refl_i ;
         
         ray = refract(ray, n, refr_a);
-        cubeRay += texture(iChannel0, ray).rgb * refr_i;
+        cubeRay += textureForCube(iChannel0, ray).rgb * refr_i;
         
         col = cubeRay+pow(b,15.);
         
@@ -179,7 +179,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     }
     else
     {
-        col = texture(iChannel0, rd).rgb;
+        col = textureForCube(iChannel0, rd).rgb;
     }
     
     //col *= dstef;
