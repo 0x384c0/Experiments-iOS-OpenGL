@@ -28,7 +28,6 @@ class OpenGLView:UIView,ShaderToyRenderer{
     
     func config(shaderName: String,texture0Name:String?,texture1Name:String?,texture2Name:String?,texture3Name:String?,isOpaque:Bool = true) {
         self.glViewIsOpaque = isOpaque
-        backgroundColor = UIColor.clear
         setupLayer()
         setupContext()
         setupRenderBuffer()
