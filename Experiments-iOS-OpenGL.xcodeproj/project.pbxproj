@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4940AACA1F5139D1000C9091 /* ShaderGLKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940AAC91F5139D1000C9091 /* ShaderGLKitViewController.swift */; };
+		49286F9E1FA070ED00460CC3 /* ShaderSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49286F9B1FA070EC00460CC3 /* ShaderSelectViewController.swift */; };
+		49286F9F1FA070ED00460CC3 /* ShaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49286F9C1FA070EC00460CC3 /* ShaderViewController.swift */; };
+		49286FA01FA070ED00460CC3 /* ShaderGLKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49286F9D1FA070ED00460CC3 /* ShaderGLKitViewController.swift */; };
+		49286FA21FA0712500460CC3 /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49286FA11FA0712500460CC3 /* ModelViewController.swift */; };
+		49286FA51FA076FF00460CC3 /* models_3d in Resources */ = {isa = PBXBuildFile; fileRef = 49286FA41FA076E300460CC3 /* models_3d */; };
 		4940AACC1F51408F000C9091 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4940AACB1F51408F000C9091 /* GLKit.framework */; };
 		49602FA21F53DC3E00B08BE9 /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49602FA11F53DC3E00B08BE9 /* Shader.swift */; };
 		49602FA61F54052600B08BE9 /* ShaderToyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49602FA51F54052600B08BE9 /* ShaderToyRenderer.swift */; };
 		49A7FA201F4FEDEB004F8C5A /* images in Resources */ = {isa = PBXBuildFile; fileRef = 49A7FA1F1F4FEDEB004F8C5A /* images */; };
 		49EEB2D91F4D58D100F41908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2D81F4D58D100F41908 /* AppDelegate.swift */; };
-		49EEB2DB1F4D58D100F41908 /* ShaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */; };
 		49EEB2DE1F4D58D100F41908 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EEB2DC1F4D58D100F41908 /* Main.storyboard */; };
 		49EEB2E31F4D58D100F41908 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EEB2E21F4D58D100F41908 /* Assets.xcassets */; };
 		49EEB2E61F4D58D100F41908 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EEB2E41F4D58D100F41908 /* LaunchScreen.storyboard */; };
@@ -21,11 +24,17 @@
 		49EEB2F11F4D594900F41908 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49EEB2F01F4D594900F41908 /* QuartzCore.framework */; };
 		49EEB2F31F4D5B0000F41908 /* OpenGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB2F21F4D5B0000F41908 /* OpenGLView.swift */; };
 		49EEB2FF1F4D90F300F41908 /* shaders in Resources */ = {isa = PBXBuildFile; fileRef = 49EEB2FE1F4D90F300F41908 /* shaders */; };
-		49EEB3021F4EC2C600F41908 /* ShaderSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EEB3011F4EC2C600F41908 /* ShaderSelectViewController.swift */; };
+		8054D34EB6A1F619BD995C80 /* Pods_Experiments_iOS_OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C1129CC59E14190CE89396 /* Pods_Experiments_iOS_OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4940AAC91F5139D1000C9091 /* ShaderGLKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderGLKitViewController.swift; sourceTree = "<group>"; };
+		42C1129CC59E14190CE89396 /* Pods_Experiments_iOS_OpenGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Experiments_iOS_OpenGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49286F9B1FA070EC00460CC3 /* ShaderSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShaderSelectViewController.swift; path = viewControllers/shaders/ShaderSelectViewController.swift; sourceTree = "<group>"; };
+		49286F9C1FA070EC00460CC3 /* ShaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShaderViewController.swift; path = viewControllers/shaders/ShaderViewController.swift; sourceTree = "<group>"; };
+		49286F9D1FA070ED00460CC3 /* ShaderGLKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShaderGLKitViewController.swift; path = viewControllers/shaders/ShaderGLKitViewController.swift; sourceTree = "<group>"; };
+		49286FA11FA0712500460CC3 /* ModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ModelViewController.swift; path = viewControllers/models/ModelViewController.swift; sourceTree = "<group>"; };
+		49286FA31FA0741700460CC3 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		49286FA41FA076E300460CC3 /* models_3d */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models_3d; sourceTree = "<group>"; };
 		4940AACB1F51408F000C9091 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		49602FA11F53DC3E00B08BE9 /* Shader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shader.swift; path = utils/Shader.swift; sourceTree = "<group>"; };
 		49602FA51F54052600B08BE9 /* ShaderToyRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShaderToyRenderer.swift; path = utils/ShaderToyRenderer.swift; sourceTree = "<group>"; };
@@ -33,7 +42,6 @@
 		49A7FA1F1F4FEDEB004F8C5A /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = SOURCE_ROOT; };
 		49EEB2D51F4D58D100F41908 /* Experiments-iOS-OpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Experiments-iOS-OpenGL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EEB2D81F4D58D100F41908 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderViewController.swift; sourceTree = "<group>"; };
 		49EEB2DD1F4D58D100F41908 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49EEB2E21F4D58D100F41908 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49EEB2E51F4D58D100F41908 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,7 +51,8 @@
 		49EEB2F21F4D5B0000F41908 /* OpenGLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenGLView.swift; sourceTree = "<group>"; };
 		49EEB2F91F4D72B900F41908 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		49EEB2FE1F4D90F300F41908 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shaders; sourceTree = "<group>"; };
-		49EEB3011F4EC2C600F41908 /* ShaderSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderSelectViewController.swift; sourceTree = "<group>"; };
+		5E74F810A9CE781B4AB58A4E /* Pods-Experiments-iOS-OpenGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Experiments-iOS-OpenGL.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Experiments-iOS-OpenGL/Pods-Experiments-iOS-OpenGL.debug.xcconfig"; sourceTree = "<group>"; };
+		DF4D63E72E2C237D824CCC50 /* Pods-Experiments-iOS-OpenGL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Experiments-iOS-OpenGL.release.xcconfig"; path = "Pods/Target Support Files/Pods-Experiments-iOS-OpenGL/Pods-Experiments-iOS-OpenGL.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +63,31 @@
 				4940AACC1F51408F000C9091 /* GLKit.framework in Frameworks */,
 				49EEB2F11F4D594900F41908 /* QuartzCore.framework in Frameworks */,
 				49EEB2EF1F4D593A00F41908 /* OpenGLES.framework in Frameworks */,
+				8054D34EB6A1F619BD995C80 /* Pods_Experiments_iOS_OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49286F991FA070A000460CC3 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				49286F9D1FA070ED00460CC3 /* ShaderGLKitViewController.swift */,
+				49286F9B1FA070EC00460CC3 /* ShaderSelectViewController.swift */,
+				49286F9C1FA070EC00460CC3 /* ShaderViewController.swift */,
+			);
+			name = shaders;
+			sourceTree = "<group>";
+		};
+		49286F9A1FA070B600460CC3 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				49286FA11FA0712500460CC3 /* ModelViewController.swift */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
 		49602FA01F53DC2300B08BE9 /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,9 +100,8 @@
 		49602FA31F53DC9300B08BE9 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				49EEB3011F4EC2C600F41908 /* ShaderSelectViewController.swift */,
-				49EEB2DA1F4D58D100F41908 /* ShaderViewController.swift */,
-				4940AAC91F5139D1000C9091 /* ShaderGLKitViewController.swift */,
+				49286F9A1FA070B600460CC3 /* models */,
+				49286F991FA070A000460CC3 /* shaders */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -93,6 +120,7 @@
 				49EEB2D71F4D58D100F41908 /* Experiments-iOS-OpenGL */,
 				49EEB2D61F4D58D100F41908 /* Products */,
 				49EEB2ED1F4D593A00F41908 /* Frameworks */,
+				5230B22392732523E9895DB2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +140,7 @@
 				49602FA01F53DC2300B08BE9 /* utils */,
 				49A7FA1F1F4FEDEB004F8C5A /* images */,
 				49EEB2FE1F4D90F300F41908 /* shaders */,
+				49286FA41FA076E300460CC3 /* models_3d */,
 				49EEB2DC1F4D58D100F41908 /* Main.storyboard */,
 				49EEB3001F4D910100F41908 /* Supporting Files */,
 			);
@@ -124,6 +153,7 @@
 				4940AACB1F51408F000C9091 /* GLKit.framework */,
 				49EEB2F01F4D594900F41908 /* QuartzCore.framework */,
 				49EEB2EE1F4D593A00F41908 /* OpenGLES.framework */,
+				42C1129CC59E14190CE89396 /* Pods_Experiments_iOS_OpenGL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -137,8 +167,18 @@
 				49A7FA1E1F4FEDD7004F8C5A /* README.md */,
 				49EEB2E71F4D58D100F41908 /* Info.plist */,
 				49EEB2F91F4D72B900F41908 /* .gitignore */,
+				49286FA31FA0741700460CC3 /* Bridging-Header.h */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5230B22392732523E9895DB2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5E74F810A9CE781B4AB58A4E /* Pods-Experiments-iOS-OpenGL.debug.xcconfig */,
+				DF4D63E72E2C237D824CCC50 /* Pods-Experiments-iOS-OpenGL.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,9 +188,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49EEB2EA1F4D58D100F41908 /* Build configuration list for PBXNativeTarget "Experiments-iOS-OpenGL" */;
 			buildPhases = (
+				CB6FC03B2320A78A762F298D /* [CP] Check Pods Manifest.lock */,
 				49EEB2D11F4D58D100F41908 /* Sources */,
 				49EEB2D21F4D58D100F41908 /* Frameworks */,
 				49EEB2D31F4D58D100F41908 /* Resources */,
+				0CBC1890B308854092745BBE /* [CP] Embed Pods Frameworks */,
+				B1EF2680868AF3A6775BC31C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,22 +249,78 @@
 				49EEB2FF1F4D90F300F41908 /* shaders in Resources */,
 				49EEB2E31F4D58D100F41908 /* Assets.xcassets in Resources */,
 				49EEB2DE1F4D58D100F41908 /* Main.storyboard in Resources */,
+				49286FA51FA076FF00460CC3 /* models_3d in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0CBC1890B308854092745BBE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Experiments-iOS-OpenGL/Pods-Experiments-iOS-OpenGL-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GLView/GLView.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GLView.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Experiments-iOS-OpenGL/Pods-Experiments-iOS-OpenGL-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1EF2680868AF3A6775BC31C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Experiments-iOS-OpenGL/Pods-Experiments-iOS-OpenGL-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB6FC03B2320A78A762F298D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Experiments-iOS-OpenGL-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		49EEB2D11F4D58D100F41908 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49EEB2DB1F4D58D100F41908 /* ShaderViewController.swift in Sources */,
-				4940AACA1F5139D1000C9091 /* ShaderGLKitViewController.swift in Sources */,
+				49286FA01FA070ED00460CC3 /* ShaderGLKitViewController.swift in Sources */,
+				49286F9F1FA070ED00460CC3 /* ShaderViewController.swift in Sources */,
+				49286F9E1FA070ED00460CC3 /* ShaderSelectViewController.swift in Sources */,
 				49602FA21F53DC3E00B08BE9 /* Shader.swift in Sources */,
+				49286FA21FA0712500460CC3 /* ModelViewController.swift in Sources */,
 				49EEB2F31F4D5B0000F41908 /* OpenGLView.swift in Sources */,
 				49602FA61F54052600B08BE9 /* ShaderToyRenderer.swift in Sources */,
-				49EEB3021F4EC2C600F41908 /* ShaderSelectViewController.swift in Sources */,
 				49EEB2D91F4D58D100F41908 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,28 +444,32 @@
 		};
 		49EEB2EB1F4D58D100F41908 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E74F810A9CE781B4AB58A4E /* Pods-Experiments-iOS-OpenGL.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AW8RFH6CD4;
 				INFOPLIST_FILE = "Experiments-iOS-OpenGL/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.0x384c0.Experiments-iOS-OpenGL";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		49EEB2EC1F4D58D100F41908 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF4D63E72E2C237D824CCC50 /* Pods-Experiments-iOS-OpenGL.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AW8RFH6CD4;
 				INFOPLIST_FILE = "Experiments-iOS-OpenGL/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.0x384c0.Experiments-iOS-OpenGL";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
