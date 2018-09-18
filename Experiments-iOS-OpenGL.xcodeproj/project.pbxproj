@@ -193,7 +193,6 @@
 				49EEB2D21F4D58D100F41908 /* Frameworks */,
 				49EEB2D31F4D58D100F41908 /* Resources */,
 				0CBC1890B308854092745BBE /* [CP] Embed Pods Frameworks */,
-				B1EF2680868AF3A6775BC31C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -272,21 +271,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Experiments-iOS-OpenGL/Pods-Experiments-iOS-OpenGL-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B1EF2680868AF3A6775BC31C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Experiments-iOS-OpenGL/Pods-Experiments-iOS-OpenGL-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CB6FC03B2320A78A762F298D /* [CP] Check Pods Manifest.lock */ = {
