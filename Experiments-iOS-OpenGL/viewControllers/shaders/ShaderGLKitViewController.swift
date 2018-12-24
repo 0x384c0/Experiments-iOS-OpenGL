@@ -15,7 +15,7 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
     var
     playBtn:UIBarButtonItem!,
     pauseleBtn:UIBarButtonItem!
-    func playPauseToggle(_ sender: UIBarButtonItem) {
+    @objc func playPauseToggle(_ sender: UIBarButtonItem) {
         var toggleBtn = playBtn
         if isPlaying {
             isPlaying = false
@@ -35,7 +35,7 @@ class ShaderGLKitViewController: GLKViewController, ShaderToyRenderer {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        glView.context = EAGLContext(api: .openGLES3)
+        glView.context = EAGLContext(api: .openGLES3)!
         EAGLContext.setCurrent(glView.context)
         let program = glCreateProgram()
         compileShaders(shaderName: settings!.shaderName,program: program)

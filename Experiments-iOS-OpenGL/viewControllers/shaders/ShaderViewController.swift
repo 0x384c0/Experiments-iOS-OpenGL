@@ -15,7 +15,7 @@ class ShaderViewController: UIViewController {
     var
     playBtn:UIBarButtonItem!,
     pauseleBtn:UIBarButtonItem!
-    func playPauseToggle(_ sender: UIBarButtonItem) {
+    @objc func playPauseToggle(_ sender: UIBarButtonItem) {
         var toggleBtn = playBtn
         if glView.isPlaying {
             glView.isPlaying = false

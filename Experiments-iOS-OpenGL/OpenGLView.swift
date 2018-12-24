@@ -46,7 +46,7 @@ class OpenGLView:UIView,ShaderToyRenderer{
     }
     
     private func setupLayer(){
-        eaglLayer = layer as! CAEAGLLayer
+        eaglLayer = layer as? CAEAGLLayer
         eaglLayer.isOpaque = glViewIsOpaque
         backgroundColor = UIColor.clear
     }
@@ -80,7 +80,7 @@ class OpenGLView:UIView,ShaderToyRenderer{
     private var link:CADisplayLink?
     private func setupDisplayLink(){
         link = CADisplayLink(target: self, selector: #selector(renderSingleFrame))
-        link?.add(to: RunLoop.current, forMode: .defaultRunLoopMode)
+        link?.add(to: RunLoop.current, forMode: RunLoop.Mode.default)
     }
     @objc func renderSingleFrame(){
         render()
